@@ -4,8 +4,18 @@ require("dotenv").config();
 // Web server config
 const PORT = process.env.PORT || 3001;
 const express = require("express");
+const socketio = require("socket.io");
+const http = require("http");
 const app = express();
 const morgan = require("morgan");
+
+const server = http.createServer(app);
+
+const io = socketio(server, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -23,6 +33,16 @@ const usersRoutes = require("./routes/users");
 app.use("/", indexRouter);
 app.use("/users", usersRoutes(db));
 
-app.listen(PORT, () => {
+io.on("connection", (socket) => {
+  console.log("client connected: ", socket.id);
+
+  socket.join("MarkThatDown-App");
+
+  socket.on("disconnect", (reason) => {
+    console.log(`client disconnected: ${socket.id} - ${reason}`);
+  });
+});
+
+server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
