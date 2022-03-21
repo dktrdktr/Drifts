@@ -1,6 +1,6 @@
 const NotebookListItem = () => {
   return ( <>
-  <p>Notebook List Item</p>
+  <p >Notebook List Item</p>
   </> );
 }
  
