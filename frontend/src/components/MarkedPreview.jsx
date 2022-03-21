@@ -1,9 +1,13 @@
-const MarkedPreview = () => {
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const MarkedPreview = ({ text }) => {
   return (
-    <>
-      <h3>Marked Preview</h3>
-      <p class="w-full h-2/5 resize-none border-2"></p>
-    </>
+    <div className="w-6/12 h-full p-6 border-2 border-black">
+      <article className="w-full h-full prose lg:prose-xl">
+        <ReactMarkdown children={text} remarkPlugins={[remarkGfm]} />
+      </article>
+    </div>
   );
 };
 

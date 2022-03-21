@@ -1,9 +1,21 @@
-const MarkedInput = () => {
+const MarkedInput = ({ setText, text }) => {
+  const onInputChange = (e) => {
+    const newValue = e.currentTarget.value;
+    setText(newValue);
+  };
+
   return (
-    <>
-      <h3>Marked Input</h3>
-      <textarea class="w-full h-2/5 resize-none border-2"></textarea>
-    </>
+    <div className="w-6/12 h-full p-6 border-2 border-black">
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="10"
+        className="border-2 p-2"
+        onChange={onInputChange}
+        value={text}
+      ></textarea>
+    </div>
   );
 };
 
