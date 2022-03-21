@@ -3,7 +3,7 @@ import NotebookList from "./NotebookList";
 const Sidebar = () => {
   return (
     <>
-      <h1 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
+      <h1 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg transition duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white group">
         <svg
           class="w-6 h-6 dark:text-white"
           fill="none"
