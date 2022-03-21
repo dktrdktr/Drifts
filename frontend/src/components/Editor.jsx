@@ -8,7 +8,7 @@ const Editor = () => {
       <MarkedInput />
       <MarkedPreview />
     </>
-  );
+  )
 };
 
 export default Editor;
