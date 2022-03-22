@@ -29,9 +29,11 @@ app.use(express.static("public"));
 
 const indexRouter = require("./routes/index");
 const usersRoutes = require("./routes/users");
+const notebooksRoutes = require("./routes/notebooks");
 
 app.use("/", indexRouter);
 app.use("/users", usersRoutes(db));
+app.use("/notebooks", notebooksRoutes(db));
 
 io.on("connection", (socket) => {
   console.log("client connected: ", socket.id);
