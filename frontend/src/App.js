@@ -2,14 +2,22 @@ import React, { useEffect } from "react";
 import { io } from "socket.io-client";
 import "./App.css";
 
-// import NotebookList from "./components/Notebooks/NotebookList";
-// import NoteList from "./components/Notes/NoteList";
-import Sidebar from "./components/Sidebar";
+import NotebookList from "./components/Notebooks/NotebookList";
+import NoteList from "./components/Notes/NoteList";
 import Editor from "./components/Editor/Editor";
+import { useState } from "react";
+import useWindowWidth from "./hooks/useWindowWidth";
 
 const ENDPOINT = "http://localhost:3000";
 
+const MENU = "MENU";
+const EDITOR = "EDITOR";
+const MD_BREAKPOINT = 768;
+
 function App() {
+  const [viewMode, setViewMode] = useState(MENU);
+  const { width } = useWindowWidth();
+
   useEffect(() => {
     const socket = io(ENDPOINT);
     socket.on("connect", () => console.log(socket.id));
@@ -18,18 +26,42 @@ function App() {
     });
   }, []);
 
+  const handleNoteClick = () => {
+    setViewMode(EDITOR);
+  };
+  const handleEditorBackClick = () => {
+    setViewMode(MENU);
+  };
+
   return (
-    <div className="container mx-auto h-full flex flex-row p-6 space-x-8">
-      {/* <div className="w-2/12 h-full p-2 border-y-2 border-l-2">
-          <NotebookList />
+    <div className="container mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
+      {viewMode === MENU && width < MD_BREAKPOINT && (
+        <>
+          <div className="flex flex-row p-2 space-x-3">
+            <NotebookList />
+            <NoteList handleNoteClick={handleNoteClick} />
+          </div>
+        </>
+      )}
+      {viewMode === EDITOR && width < MD_BREAKPOINT && (
+        <div className="w-full md:w-8/12 h-full p-2">
+          <Editor
+            viewMode={viewMode}
+            handleEditorBackClick={handleEditorBackClick}
+          />
         </div>
-        <div className="w-2/12 h-full p-2 border-y-2 border-l-2">
-          <NoteList />
-        </div> */}
-      <Sidebar className="w-100 flex flex-row items-start p-2 space-x-3" />
-      <div className="w-8/12 h-full p-2 outline outline-2 outline-black">
-        <Editor />
-      </div>
+      )}
+      {width > MD_BREAKPOINT && (
+        <>
+          <div className="flex flex-row mw-100 items-start p-2 space-x-3">
+            <NotebookList />
+            <NoteList />
+          </div>
+          <div className="w-full md:w-8/12 h-full p-2">
+            <Editor />
+          </div>
+        </>
+      )}
     </div>
   );
 }
