@@ -4,56 +4,56 @@ import { useState } from "react";
 import { EyeIcon } from "@heroicons/react/outline";
 import { CashIcon } from "@heroicons/react/outline";
 
+const SPLIT = "SPLIT";
+const EDIT = "EDIT";
+const VIEW = "VIEW";
+
 const Editor = () => {
   const [text, setText] = useState("# Lecture notes \n Syntax highlighting");
-  const [viewMode, setViewMode] = useState("editMode");
+  const [editorMode, setEditorMode] = useState(EDIT);
 
   return (
     <>
       <div className="w-full h-1/12 flex justify-between">
         <div></div>
         <div className="flex flex-row gap-x-2">
-          {viewMode !== "splitView" && (
+          {editorMode !== SPLIT && (
             <EyeIcon
               className={
-                viewMode === "viewMode"
+                editorMode === VIEW
                   ? "h-8 w-8 cursor-pointer text-blue-500"
                   : "h-8 w-8 cursor-pointer"
               }
               onClick={() =>
-                viewMode === "editMode"
-                  ? setViewMode("viewMode")
-                  : setViewMode("editMode")
+                editorMode === EDIT ? setEditorMode(VIEW) : setEditorMode(EDIT)
               }
             />
           )}
           <CashIcon
             className={
-              viewMode === "splitView"
+              editorMode === SPLIT
                 ? "h-8 w-8 cursor-pointer text-blue-500"
                 : "h-8 w-8 cursor-pointer"
             }
             onClick={() =>
-              viewMode !== "splitView"
-                ? setViewMode("splitView")
-                : setViewMode("editMode")
+              editorMode !== SPLIT ? setEditorMode(SPLIT) : setEditorMode(EDIT)
             }
           />
         </div>
       </div>
       <section className="w-full h-full flex">
-        {viewMode === "splitView" && (
+        {editorMode === SPLIT && (
           <>
             <MarkedInput setText={setText} text={text} />
             <MarkedPreview text={text} />
           </>
         )}
-        {viewMode === "editMode" && (
+        {editorMode === EDIT && (
           <>
             <MarkedInput setText={setText} text={text} />
           </>
         )}
-        {viewMode === "viewMode" && (
+        {editorMode === VIEW && (
           <>
             <MarkedPreview text={text} />
           </>
