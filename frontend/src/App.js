@@ -3,7 +3,6 @@ import { io } from "socket.io-client";
 import "./App.css";
 
 import Sidebar from "./components/Sidebar";
-import NoteList from "./components/NoteList";
 import Editor from "./components/Editor";
 
 const ENDPOINT = "http://localhost:3000";
@@ -20,12 +19,8 @@ function App() {
   return (
     <>
       <div className="w-full h-full flex flex-row items-center p-12">
-        <div className="w-2/12 h-full p-2 border-y-2 border-l-2">
-          <Sidebar />
-        </div>
-        <div className="w-3/12 h-full p-2 border-y-2 border-l-2">
-          <NoteList />
-        </div>
+        <Sidebar />
+
         <div className="w-7/12 h-full p-2 border-2">
           <Editor />
         </div>
