@@ -1,7 +1,8 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
 import { useState } from "react";
-import { EyeIcon, CashIcon } from "@heroicons/react/outline";
+import { EyeIcon, CashIcon, DocumentTextIcon } from "@heroicons/react/outline";
+import Heading from "../Heading";
 
 const SPLIT = "SPLIT";
 const EDIT = "EDIT";
@@ -14,7 +15,7 @@ const Editor = () => {
   return (
     <>
       <div className="w-full h-1/12 flex justify-between">
-        <div></div>
+        <Heading title={"Note"} Icon={DocumentTextIcon} />
         <div className="flex flex-row gap-x-2">
           {editorMode !== SPLIT && (
             <EyeIcon
@@ -40,7 +41,7 @@ const Editor = () => {
           />
         </div>
       </div>
-      <section className="w-full h-full flex">
+      <section className="w-full h-4/5 flex flex-column">
         {editorMode === SPLIT && (
           <>
             <MarkedInput setText={setText} text={text} />
