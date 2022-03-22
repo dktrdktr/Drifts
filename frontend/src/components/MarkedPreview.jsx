@@ -3,8 +3,8 @@ import remarkGfm from "remark-gfm";
 
 const MarkedPreview = ({ text }) => {
   return (
-    <div className="w-6/12 h-full p-6 border-2 border-black">
-      <article className="w-full h-full prose lg:prose-xl">
+    <div className="w-full h-full py-6">
+      <article className="h-full max-w-[60ch] mx-auto border-2 p-4 prose">
         <ReactMarkdown children={text} remarkPlugins={[remarkGfm]} />
       </article>
     </div>

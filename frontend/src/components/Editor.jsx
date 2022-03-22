@@ -5,14 +5,18 @@ import { useState } from "react";
 
 const Editor = () => {
   const [text, setText] = useState("");
-  const [viewMode, setViewMode] = useState(false);
+  const [viewMode, setViewMode] = useState("splitView");
 
   return (
     <>
       <section className="w-full h-full flex">
-        {viewMode && <MarkedPreview text={text} />}
-        {!viewMode && <MarkedInput setText={setText} text={text} />}
-        <EditorViewToggle viewMode={viewMode} setViewMode={setViewMode} />
+        {viewMode==="splitView" && (
+          <>
+          <MarkedInput setText={setText} text={text} />
+      <MarkedPreview text={text} />
+          </>
+        )}
+        {/* <EditorViewToggle viewMode={viewMode} setViewMode={setViewMode} /> */}
       </section>
     </>
   );

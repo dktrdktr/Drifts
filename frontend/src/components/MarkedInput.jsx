@@ -5,16 +5,16 @@ const MarkedInput = ({ setText, text }) => {
   };
 
   return (
-    <div className="w-6/12 h-full p-6 border-2 border-black">
+    <div className="w-full h-full py-6">
+      <div className="h-full max-w-[60ch] mx-auto border-2 p-4 bg-[#f8f8f8]">
       <textarea
         name=""
         id=""
-        cols="30"
-        rows="10"
-        className="border-2 p-2"
+        className="h-full w-full bg-[#f8f8f8]"
         onChange={onInputChange}
         value={text}
       ></textarea>
+      </div>
     </div>
   );
 };
