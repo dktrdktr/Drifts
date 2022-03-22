@@ -1,8 +1,7 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
 import { useState } from "react";
-import { EyeIcon } from "@heroicons/react/outline";
-import { CashIcon } from "@heroicons/react/outline";
+import { EyeIcon, CashIcon } from "@heroicons/react/outline";
 
 const SPLIT = "SPLIT";
 const EDIT = "EDIT";
