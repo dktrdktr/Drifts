@@ -3,7 +3,6 @@ import { io } from "socket.io-client";
 import "./App.css";
 
 import Sidebar from "./components/Sidebar";
-import NoteList from "./components/NoteList";
 import Editor from "./components/Editor";
 
 const ENDPOINT = "http://localhost:3000";
