@@ -7,6 +7,7 @@ import NoteList from "./components/Notes/NoteList";
 import Editor from "./components/Editor/Editor";
 import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
+import useNotebooksData from "./hooks/useNotebooksData";
 
 const ENDPOINT = "http://localhost:3000";
 
@@ -17,6 +18,7 @@ const MD_BREAKPOINT = 768;
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
   const { width } = useWindowWidth();
+  const { notebooksData } = useNotebooksData();
 
   useEffect(() => {
     const socket = io(ENDPOINT);
@@ -38,7 +40,7 @@ function App() {
       {viewMode === MENU && width < MD_BREAKPOINT && (
         <>
           <div className="flex flex-row p-2 space-x-3">
-            <NotebookList />
+            <NotebookList notebooksData={notebooksData} />
             <NoteList handleNoteClick={handleNoteClick} />
           </div>
         </>
