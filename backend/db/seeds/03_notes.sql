@@ -1,9 +1,9 @@
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note1', '##Sample text', 1);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note2', '##Sample text', 1);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note3', '##Sample text', 1);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook2 - Note1', '##Sample text', 2);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook2 - Note2', '##Sample text', 2);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook3 - Note1', '##Sample text', 3);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook4 - Note1', '##Sample text', 4);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook5 - Note1', '##Sample text', 5);
-INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook6 - Note1', '##Sample text', 6);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note1', '## Notebook1 - Note1', 1);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note2', '## Notebook1 - Note2', 1);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook1 - Note3', '## Notebook1 - Note3', 1);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook2 - Note1', '## Notebook2 - Note1', 2);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook2 - Note2', '## Notebook2 - Note2', 2);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook3 - Note1', '## Notebook3 - Note1', 3);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook4 - Note1', '## Notebook4 - Note1', 4);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook5 - Note1', '## Notebook5 - Note1', 5);
+INSERT INTO notes (title, content, notebook_id) VALUES ('Notebook6 - Note1', '## Notebook6 - Note1', 6);
