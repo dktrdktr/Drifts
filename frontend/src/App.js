@@ -59,7 +59,7 @@ function App() {
         <>
           <div className="flex flex-row mw-100 items-start p-2 space-x-3">
             <NotebookList notebooksData={notebooksData} />
-            <NoteList />
+            <NoteList handleNoteClick={handleNoteClick} />
           </div>
           <div className="w-full md:w-8/12 h-full p-2">
             <Editor />
