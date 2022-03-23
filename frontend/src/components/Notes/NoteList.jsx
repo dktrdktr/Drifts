@@ -3,8 +3,10 @@ import Heading from "../Heading";
 import { NewspaperIcon } from "@heroicons/react/outline";
 
 const NoteList = ({ handleNoteClick, notes, setText }) => {
-  const renderNotes = () => {
-    return notes.map((item) => {
+  let renderNotes = null;
+
+  if (notes[0] !== null) {
+    renderNotes = notes.map((item) => {
       return (
         <NoteListItem
           key={item.id}
@@ -16,12 +18,12 @@ const NoteList = ({ handleNoteClick, notes, setText }) => {
         />
       );
     });
-  };
+  }
 
   return (
     <div>
       <Heading title={"Notes"} Icon={NewspaperIcon} />
-      {renderNotes()}
+      {renderNotes}
     </div>
   );
 };
