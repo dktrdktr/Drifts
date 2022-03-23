@@ -17,8 +17,7 @@ const MD_BREAKPOINT = 768;
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
   const [notes, setNotes] = useState([]);
-  const [mdContent, setMdContent] = useState("");
-  const [text, setText] = useState(mdContent);
+  const [text, setText] = useState("");
 
   const { width } = useWindowWidth();
 
@@ -26,10 +25,6 @@ function App() {
     const socket = io(ENDPOINT);
     socket.on("connect", () => console.log(socket.id));
   }, []);
-
-  useEffect(() => {
-    setText(mdContent);
-  }, [mdContent]);
 
   const handleNoteClick = () => {
     setViewMode(EDITOR);
@@ -48,7 +43,7 @@ function App() {
               <NoteList
                 handleNoteClick={handleNoteClick}
                 notes={notes}
-                setMdContent={setMdContent}
+                setText={setText}
               />
             </div>
           </>
@@ -58,7 +53,6 @@ function App() {
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
-              mdContent={mdContent}
               text={text}
               setText={setText}
             />
@@ -71,11 +65,11 @@ function App() {
               <NoteList
                 handleNoteClick={handleNoteClick}
                 notes={notes}
-                setMdContent={setMdContent}
+                setText={setText}
               />
             </div>
             <div className="w-full md:w-8/12 h-full p-2">
-              <Editor mdContent={mdContent} text={text} setText={setText} />
+              <Editor text={text} setText={setText} />
             </div>
           </>
         )}
