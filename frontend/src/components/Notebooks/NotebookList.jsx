@@ -4,7 +4,7 @@ import { CollectionIcon } from "@heroicons/react/outline";
 import { NotebooksContext } from "../../providers/NotebooksProvider";
 import { useContext } from "react";
 
-const NotebookList = () => {
+const NotebookList = ({ setNotes }) => {
   const { notebooksData, isLoading } = useContext(NotebooksContext);
 
   const renderNotebooks = (userId) => {
@@ -13,7 +13,13 @@ const NotebookList = () => {
     );
 
     return filteredNotebooks.map((item) => {
-      return <NotebookListItem key={item.id} book={item.book} />;
+      return (
+        <NotebookListItem
+          key={item.id}
+          book={item.book}
+          onClick={() => setNotes(item.notes)}
+        />
+      );
     });
   };
 
@@ -26,3 +32,4 @@ const NotebookList = () => {
 };
 
 export default NotebookList;
+

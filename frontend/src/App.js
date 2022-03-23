@@ -16,6 +16,8 @@ const MD_BREAKPOINT = 768;
 
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
+  const [notes, setNotes] = useState([]);
+
   const { width } = useWindowWidth();
 
   useEffect(() => {
@@ -39,8 +41,8 @@ function App() {
         {viewMode === MENU && width < MD_BREAKPOINT && (
           <>
             <div className="flex flex-row p-2 space-x-3">
-              <NotebookList />
-              <NoteList handleNoteClick={handleNoteClick} />
+              <NotebookList setNotes={setNotes} />
+              <NoteList handleNoteClick={handleNoteClick} notes={notes} />
             </div>
           </>
         )}
@@ -55,8 +57,8 @@ function App() {
         {width > MD_BREAKPOINT && (
           <>
             <div className="flex flex-row mw-100 items-start p-2 space-x-3">
-              <NotebookList />
-              <NoteList handleNoteClick={handleNoteClick} />
+              <NotebookList setNotes={setNotes} />
+              <NoteList handleNoteClick={handleNoteClick} notes={notes} />
             </div>
             <div className="w-full md:w-8/12 h-full p-2">
               <Editor />

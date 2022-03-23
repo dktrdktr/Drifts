@@ -2,13 +2,23 @@ import NoteListItem from "./NoteListItem";
 import Heading from "../Heading";
 import { NewspaperIcon } from "@heroicons/react/outline";
 
-const NoteList = ({ handleNoteClick }) => {
+const NoteList = ({ handleNoteClick, notes }) => {
+  const renderNotes = () => {
+    return notes.map((item) => {
+      return (
+        <NoteListItem
+          key={item.id}
+          title={item.title}
+          handleNoteClick={handleNoteClick}
+        />
+      );
+    });
+  };
+
   return (
     <div>
       <Heading title={"Notes"} Icon={NewspaperIcon} />
-      <NoteListItem title={"Note Title 1"} handleNoteClick={handleNoteClick} />
-      <NoteListItem title={"Note Title 2"} handleNoteClick={handleNoteClick} />
-      <NoteListItem title={"Note Title 3"} handleNoteClick={handleNoteClick} />
+      {renderNotes()}
     </div>
   );
 };
