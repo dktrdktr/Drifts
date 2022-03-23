@@ -18,15 +18,13 @@ function App() {
   const [viewMode, setViewMode] = useState(MENU);
   const [notes, setNotes] = useState([]);
   const [mdContent, setMdContent] = useState("");
+  const [text, setText] = useState(mdContent);
 
   const { width } = useWindowWidth();
 
   useEffect(() => {
     const socket = io(ENDPOINT);
     socket.on("connect", () => console.log(socket.id));
-    socket.on("connect_error", () => {
-      setTimeout(() => socket.connect(), 5000);
-    });
   }, []);
 
   const handleNoteClick = () => {
@@ -57,6 +55,8 @@ function App() {
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
               mdContent={mdContent}
+              text={text}
+              setText={setText}
             />
           </div>
         )}
@@ -71,7 +71,7 @@ function App() {
               />
             </div>
             <div className="w-full md:w-8/12 h-full p-2">
-              <Editor mdContent={mdContent} />
+              <Editor mdContent={mdContent} text={text} setText={setText} />
             </div>
           </>
         )}
