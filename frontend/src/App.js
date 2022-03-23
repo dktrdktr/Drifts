@@ -6,7 +6,7 @@ import NoteList from "./components/Notes/NoteList";
 import Editor from "./components/Editor/Editor";
 import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
-import NotebooksProvider from "./providers/NotebooksProvider";
+import StateProvider from "./providers/StateProvider";
 
 const ENDPOINT = "http://localhost:3000";
 
@@ -34,7 +34,7 @@ function App() {
   };
 
   return (
-    <NotebooksProvider>
+    <StateProvider>
       <div className="container mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
         {viewMode === MENU && width < MD_BREAKPOINT && (
           <>
@@ -74,7 +74,7 @@ function App() {
           </>
         )}
       </div>
-    </NotebooksProvider>
+    </StateProvider>
   );
 }
 

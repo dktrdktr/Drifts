@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useNotebooksData() {
+export default function useApplicationData() {
   const [notebooksData, setNotebooksData] = useState();
   const [isLoading, setLoading] = useState(true);
 

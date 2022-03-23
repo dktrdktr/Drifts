@@ -1,11 +1,11 @@
 import NotebookListItem from "./NotebookListItem";
 import Heading from "../Heading";
 import { CollectionIcon } from "@heroicons/react/outline";
-import { NotebooksContext } from "../../providers/NotebooksProvider";
+import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NotebookList = ({ setNotes }) => {
-  const { notebooksData, isLoading } = useContext(NotebooksContext);
+  const { notebooksData, isLoading } = useContext(StateContext);
 
   const renderNotebooks = (userId) => {
     const filteredNotebooks = notebooksData.filter(
