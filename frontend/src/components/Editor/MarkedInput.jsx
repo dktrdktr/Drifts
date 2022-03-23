@@ -1,7 +1,15 @@
-const MarkedInput = ({ setText, text }) => {
+import { StateContext } from "../../providers/StateProvider";
+import { useContext } from "react";
+
+const MarkedInput = () => {
+  const { text, setState } = useContext(StateContext);
+
   const onInputChange = (e) => {
     const newValue = e.currentTarget.value;
-    setText(newValue);
+    setState((prev) => ({
+      ...prev,
+      text: newValue,
+    }));
   };
 
   return (

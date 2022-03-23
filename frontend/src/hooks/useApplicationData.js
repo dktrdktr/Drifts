@@ -7,8 +7,6 @@ export default function useApplicationData() {
     text: "",
     isLoading: true,
   });
-  const [notebooksData, setNotebooksData] = useState();
-  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
@@ -19,11 +17,9 @@ export default function useApplicationData() {
           isLoading: false,
           notebooks: data.data.notebooks,
         }));
-        setNotebooksData(data.data.notebooks);
-        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  return { state, setState, notebooksData, isLoading };
+  return { state, setState };
 }
