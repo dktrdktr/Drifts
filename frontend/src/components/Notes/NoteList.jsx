@@ -1,8 +1,12 @@
 import NoteListItem from "./NoteListItem";
 import Heading from "../Heading";
 import { NewspaperIcon } from "@heroicons/react/outline";
+import { StateContext } from "../../providers/StateProvider";
+import { useContext } from "react";
 
-const NoteList = ({ handleNoteClick, notes, setText }) => {
+const NoteList = ({ handleNoteClick }) => {
+  const { notes, setState } = useContext(StateContext);
+
   let renderNotes = null;
 
   if (notes[0] !== null) {
@@ -12,7 +16,10 @@ const NoteList = ({ handleNoteClick, notes, setText }) => {
           key={item.id}
           title={item.title}
           onClick={() => {
-            setText(item.content);
+            setState((prev) => ({
+              ...prev,
+              text: item.content,
+            }));
             handleNoteClick();
           }}
         />
