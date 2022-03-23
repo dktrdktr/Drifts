@@ -22,11 +22,11 @@ module.exports = (db) => {
     })
 
     // Update notebook name
-    .put("/:notebookId", (request, response) => {
+    .put("/:id", (request, response) => {
       db.query(
         `
       UPDATE notebooks
-      SET title = $2
+      SET book = $2
       WHERE id = ($1::integer)
       `,
         [request.params.id]
@@ -45,7 +45,7 @@ module.exports = (db) => {
     })
 
     // Delete notebook
-    .delete("/:notebookId", (request, response) => {
+    .delete("/:id", (request, response) => {
       db.query(`DELETE FROM notebooks WHERE id = $1::integer`, [
         request.params.id,
       ]).then(() => {
