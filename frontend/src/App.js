@@ -34,6 +34,7 @@ function App() {
   const handleEditorBackClick = () => {
     setViewMode(MENU);
   };
+
   if (isLoading) return <span>Loading...</span>;
 
   return (
@@ -57,7 +58,7 @@ function App() {
       {width > MD_BREAKPOINT && (
         <>
           <div className="flex flex-row mw-100 items-start p-2 space-x-3">
-            <NotebookList />
+            <NotebookList notebooksData={notebooksData} />
             <NoteList />
           </div>
           <div className="w-full md:w-8/12 h-full p-2">
