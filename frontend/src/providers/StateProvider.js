@@ -4,9 +4,11 @@ import useApplicationData from "../hooks/useApplicationData";
 export const StateContext = createContext();
 
 export default function StateProvider(props) {
-  const { notebooksData, isLoading } = useApplicationData();
+  const { state, setState, notebooksData, isLoading } = useApplicationData();
 
-  const stateProviderData = { notebooksData, isLoading };
+  const {notebooks, notes, text } = state
+
+  const stateProviderData = { setState, notebooks, notes, text, notebooksData, isLoading };
 
   return (
     <StateContext.Provider value={stateProviderData}>
