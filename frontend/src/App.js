@@ -6,7 +6,7 @@ import NoteList from "./components/Notes/NoteList";
 import Editor from "./components/Editor/Editor";
 import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
-import NotebooksProvider from "./providers/NotebooksProvider";
+import StateProvider from "./providers/StateProvider";
 
 const ENDPOINT = "http://localhost:3000";
 
@@ -16,8 +16,6 @@ const MD_BREAKPOINT = 768;
 
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
-  const [notes, setNotes] = useState([]);
-  const [text, setText] = useState("");
 
   const { width } = useWindowWidth();
 
@@ -34,17 +32,13 @@ function App() {
   };
 
   return (
-    <NotebooksProvider>
+    <StateProvider>
       <div className="container mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
         {viewMode === MENU && width < MD_BREAKPOINT && (
           <>
             <div className="flex flex-row p-2 space-x-3">
-              <NotebookList setNotes={setNotes} />
-              <NoteList
-                handleNoteClick={handleNoteClick}
-                notes={notes}
-                setText={setText}
-              />
+              <NotebookList />
+              <NoteList handleNoteClick={handleNoteClick} />
             </div>
           </>
         )}
@@ -53,28 +47,22 @@ function App() {
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
-              text={text}
-              setText={setText}
             />
           </div>
         )}
         {width > MD_BREAKPOINT && (
           <>
             <div className="flex flex-row mw-100 items-start p-2 space-x-3">
-              <NotebookList setNotes={setNotes} />
-              <NoteList
-                handleNoteClick={handleNoteClick}
-                notes={notes}
-                setText={setText}
-              />
+              <NotebookList />
+              <NoteList handleNoteClick={handleNoteClick} />
             </div>
             <div className="w-full md:w-8/12 h-full p-2">
-              <Editor text={text} setText={setText} />
+              <Editor />
             </div>
           </>
         )}
       </div>
-    </NotebooksProvider>
+    </StateProvider>
   );
 }
 

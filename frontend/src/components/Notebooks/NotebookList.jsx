@@ -1,14 +1,14 @@
 import NotebookListItem from "./NotebookListItem";
 import Heading from "../Heading";
 import { CollectionIcon } from "@heroicons/react/outline";
-import { NotebooksContext } from "../../providers/NotebooksProvider";
+import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
-const NotebookList = ({ setNotes }) => {
-  const { notebooksData, isLoading } = useContext(NotebooksContext);
+const NotebookList = () => {
+  const { notebooks, setState } = useContext(StateContext);
 
   const renderNotebooks = (userId) => {
-    const filteredNotebooks = notebooksData.filter(
+    const filteredNotebooks = notebooks.filter(
       (item) => item.user_id === userId
     );
 
@@ -17,7 +17,12 @@ const NotebookList = ({ setNotes }) => {
         <NotebookListItem
           key={item.id}
           book={item.book}
-          onClick={() => setNotes(item.notes)}
+          onClick={() =>
+            setState((prev) => ({
+              ...prev,
+              notes: item.notes,
+            }))
+          }
         />
       );
     });
@@ -26,7 +31,7 @@ const NotebookList = ({ setNotes }) => {
   return (
     <div>
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
-      {notebooksData && renderNotebooks(1)}
+      {notebooks && renderNotebooks(1)}
     </div>
   );
 };

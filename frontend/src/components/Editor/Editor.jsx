@@ -7,7 +7,7 @@ const SPLIT = "SPLIT";
 const EDIT = "EDIT";
 const VIEW = "VIEW";
 
-const Editor = ({ viewMode, handleEditorBackClick, text, setText }) => {
+const Editor = ({ viewMode, handleEditorBackClick }) => {
   const [editorMode, setEditorMode] = useState(EDIT);
 
   return (
@@ -48,18 +48,18 @@ const Editor = ({ viewMode, handleEditorBackClick, text, setText }) => {
       <section className="w-full h-4/5 flex flex-column">
         {editorMode === SPLIT && (
           <>
-            <MarkedInput setText={setText} text={text} />
-            <MarkedPreview text={text} />
+            <MarkedInput />
+            <MarkedPreview />
           </>
         )}
         {editorMode === EDIT && (
           <>
-            <MarkedInput setText={setText} text={text} />
+            <MarkedInput />
           </>
         )}
         {editorMode === VIEW && (
           <>
-            <MarkedPreview text={text} />
+            <MarkedPreview />
           </>
         )}
       </section>
