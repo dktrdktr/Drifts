@@ -2,7 +2,7 @@ import NoteListItem from "./NoteListItem";
 import Heading from "../Heading";
 import { NewspaperIcon } from "@heroicons/react/outline";
 
-const NoteList = ({ handleNoteClick, notes, setMdContent }) => {
+const NoteList = ({ handleNoteClick, notes, setText }) => {
   const renderNotes = () => {
     return notes.map((item) => {
       return (
@@ -10,7 +10,7 @@ const NoteList = ({ handleNoteClick, notes, setMdContent }) => {
           key={item.id}
           title={item.title}
           onClick={() => {
-            setMdContent(item.content);
+            setText(item.content);
             handleNoteClick();
           }}
         />
