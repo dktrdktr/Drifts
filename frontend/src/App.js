@@ -27,6 +27,10 @@ function App() {
     socket.on("connect", () => console.log(socket.id));
   }, []);
 
+  useEffect(() => {
+    setText(mdContent);
+  }, [mdContent]);
+
   const handleNoteClick = () => {
     setViewMode(EDITOR);
   };
