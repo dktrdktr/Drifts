@@ -1,6 +1,6 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EyeIcon, CashIcon, ChevronLeftIcon } from "@heroicons/react/outline";
 
 const SPLIT = "SPLIT";
@@ -10,9 +10,12 @@ const VIEW = "VIEW";
 const Editor = ({ viewMode, handleEditorBackClick, mdContent }) => {
   // replace default state with mdContent
   // need to find way to refresh/re-render editor textarea when mdContent gets updated when clicking notes
-  const [text, setText] = useState("# Lecture notes \n Syntax highlighting");
+  const [text, setText] = useState(mdContent);
   const [editorMode, setEditorMode] = useState(EDIT);
 
+  useEffect(() => {
+    setText(mdContent)
+  },[mdContent])
   return (
     <>
       <div className="w-full h-1/12 flex justify-between">
