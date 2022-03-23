@@ -7,7 +7,7 @@ module.exports = (db) => {
       db.query(
         `
       SELECT user_id, notebooks.id, notebooks.book, json_agg(notes) as notes FROM notebooks
-      JOIN notes ON notes.notebook_id = notebooks.id
+      LEFT OUTER JOIN notes ON notes.notebook_id = notebooks.id
       GROUP BY notebooks.id
       ORDER BY notebooks.id
       `
