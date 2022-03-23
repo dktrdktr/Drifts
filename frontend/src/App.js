@@ -17,6 +17,7 @@ const MD_BREAKPOINT = 768;
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
   const [notes, setNotes] = useState([]);
+  const [mdContent, setMdContent] = useState("");
 
   const { width } = useWindowWidth();
 
@@ -42,7 +43,11 @@ function App() {
           <>
             <div className="flex flex-row p-2 space-x-3">
               <NotebookList setNotes={setNotes} />
-              <NoteList handleNoteClick={handleNoteClick} notes={notes} />
+              <NoteList
+                handleNoteClick={handleNoteClick}
+                notes={notes}
+                setMdContent={setMdContent}
+              />
             </div>
           </>
         )}
@@ -51,6 +56,7 @@ function App() {
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
+              mdContent={mdContent}
             />
           </div>
         )}
@@ -58,10 +64,14 @@ function App() {
           <>
             <div className="flex flex-row mw-100 items-start p-2 space-x-3">
               <NotebookList setNotes={setNotes} />
-              <NoteList handleNoteClick={handleNoteClick} notes={notes} />
+              <NoteList
+                handleNoteClick={handleNoteClick}
+                notes={notes}
+                setMdContent={setMdContent}
+              />
             </div>
             <div className="w-full md:w-8/12 h-full p-2">
-              <Editor />
+              <Editor mdContent={mdContent} />
             </div>
           </>
         )}

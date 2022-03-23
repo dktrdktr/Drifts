@@ -7,7 +7,9 @@ const SPLIT = "SPLIT";
 const EDIT = "EDIT";
 const VIEW = "VIEW";
 
-const Editor = ({ viewMode, handleEditorBackClick }) => {
+const Editor = ({ viewMode, handleEditorBackClick, mdContent }) => {
+  // replace default state with mdContent
+  // need to find way to refresh/re-render editor textarea when mdContent gets updated when clicking notes
   const [text, setText] = useState("# Lecture notes \n Syntax highlighting");
   const [editorMode, setEditorMode] = useState(EDIT);
 

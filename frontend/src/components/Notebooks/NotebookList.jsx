@@ -32,4 +32,3 @@ const NotebookList = ({ setNotes }) => {
 };
 
 export default NotebookList;
-
