@@ -18,7 +18,7 @@ const MD_BREAKPOINT = 768;
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
   const { width } = useWindowWidth();
-  const { notebooksData } = useNotebooksData();
+  const { notebooksData, isLoading } = useNotebooksData();
 
   useEffect(() => {
     const socket = io(ENDPOINT);
@@ -34,6 +34,7 @@ function App() {
   const handleEditorBackClick = () => {
     setViewMode(MENU);
   };
+  if (isLoading) return <span>Loading...</span>;
 
   return (
     <div className="container mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
