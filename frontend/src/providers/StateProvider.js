@@ -4,20 +4,21 @@ import useApplicationData from "../hooks/useApplicationData";
 
 export const StateContext = createContext();
 
+axios.defaults.baseURL = "http://localhost:3000/";
+
 export default function StateProvider(props) {
-  const { state, setState } = useApplicationData();
+  const { state, setState, refreshData } = useApplicationData();
 
   const { notebooks, notes, text, isLoading, currentNoteId } = state;
-
-  axios.defaults.baseURL = "http://localhost:3000/";
 
   const saveNote = async () => {
     try {
       let res = await axios({
-        url: "/notes",
-        method: "post",
+        url: "/notes/" + currentNoteId,
+        method: "put",
         params: { id: currentNoteId, content: text },
       });
+      refreshData();
       return res.data;
     } catch (error) {
       return error.response;

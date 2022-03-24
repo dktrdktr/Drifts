@@ -31,7 +31,7 @@ const Editor = ({ viewMode, handleEditorBackClick }) => {
         <div className="flex flex-row gap-x-2">
           <SaveIcon
             className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
-            onClick={saveNote()}
+            onClick={() => saveNote()}
           />
           {editorMode !== SPLIT && (
             <EyeIcon

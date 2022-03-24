@@ -9,7 +9,7 @@ export default function useApplicationData() {
     currentNoteId: 0,
   });
 
-  useEffect(() => {
+  const refreshData = () => {
     axios
       .get("/notebooks")
       .then((data) => {
@@ -20,7 +20,11 @@ export default function useApplicationData() {
         }));
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    refreshData();
   }, []);
 
-  return { state, setState };
+  return { refreshData, state, setState };
 }
