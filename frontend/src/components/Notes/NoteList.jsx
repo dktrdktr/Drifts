@@ -1,5 +1,6 @@
 import NoteListItem from "./NoteListItem";
 import Heading from "../Heading";
+import AddButton from "../AddButton";
 import { NewspaperIcon } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
@@ -37,6 +38,7 @@ const NoteList = ({ handleNoteClick }) => {
     <div className="w-1/2">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
+      {renderNotes && <AddButton onClick={() => console.log("test")}/>}
     </div>
   );
 };

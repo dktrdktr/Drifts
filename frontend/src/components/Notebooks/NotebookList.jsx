@@ -1,5 +1,6 @@
 import NotebookListItem from "./NotebookListItem";
 import Heading from "../Heading";
+import AddButton from "../AddButton";
 import { CollectionIcon } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
@@ -33,6 +34,7 @@ const NotebookList = () => {
     <div className="w-1/2">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks(1)}
+      {notebooks && <AddButton onClick={() => console.log("test")}/>}
     </div>
   );
 };
