@@ -20,8 +20,7 @@ const NotebookList = () => {
           onClick={() =>
             setState((prev) => ({
               ...prev,
-              notes: item.notes,
-              currentNotebook: item,
+              currentNotebookId: item.id,
             }))
           }
         />

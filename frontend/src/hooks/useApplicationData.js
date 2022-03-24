@@ -3,14 +3,17 @@ import axios from "axios";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
-    notes: [],
     text: "",
     isLoading: true,
-    currentNotebook: {},
+    currentNotebookId: null,
     currentNote: {},
   });
 
-  const refreshData = async (currentNotebook) => {
+  useEffect(() => {
+    refreshData();
+  }, []);
+
+  const refreshData = async () => {
     try {
       let NotebookData = await axios.get("/notebooks");
 
@@ -19,28 +22,24 @@ export default function useApplicationData() {
         isLoading: false,
         notebooks: NotebookData.data.notebooks,
       }));
-
-      if (currentNotebook) {
-        let NotesData = await axios({
-          url: "/notes",
-          method: "get",
-          params: { id: currentNotebook.id },
-        });
-
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-          notes: NotesData.data.notes,
-        }));
-      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    refreshData();
-  }, []);
+  const saveNote = async (currentNoteId, text) => {
+    try {
+      let res = await axios({
+        url: "/notes/" + currentNoteId,
+        method: "put",
+        params: { id: currentNoteId, content: text },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
 
-  return { refreshData, state, setState };
+  return { state, setState, saveNote };
 }

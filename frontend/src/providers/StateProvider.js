@@ -7,32 +7,16 @@ export const StateContext = createContext();
 axios.defaults.baseURL = "http://localhost:3000/";
 
 export default function StateProvider(props) {
-  const { state, setState, refreshData } = useApplicationData();
+  const { state, setState, saveNote } = useApplicationData();
 
-  const { notebooks, notes, text, isLoading, currentNotebook, currentNote } =
-    state;
-
-  const saveNote = async () => {
-    try {
-      let res = await axios({
-        url: "/notes/" + currentNote.id,
-        method: "put",
-        params: { id: currentNote.id, content: text },
-      });
-      refreshData(currentNotebook);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
-  };
+  const { notebooks, text, isLoading, currentNotebookId, currentNote } = state;
 
   const stateProviderData = {
     setState,
     notebooks,
-    notes,
     text,
     isLoading,
-    currentNotebook,
+    currentNotebookId,
     currentNote,
     saveNote,
   };

@@ -5,12 +5,16 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NoteList = ({ handleNoteClick }) => {
-  const { notes, setState } = useContext(StateContext);
+  const { notebooks, currentNotebookId, setState } = useContext(StateContext);
 
   let renderNotes = null;
 
-  if (notes[0] !== null) {
-    renderNotes = notes.map((item) => {
+  if (currentNotebookId !== null) {
+    let notebook = notebooks.find(
+      (notebook) => notebook.id === currentNotebookId
+    );
+
+    renderNotes = notebook.notes.map((item) => {
       return (
         <NoteListItem
           key={item.id}

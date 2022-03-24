@@ -15,7 +15,7 @@ const EDIT = "EDIT";
 const VIEW = "VIEW";
 
 const Editor = ({ viewMode, handleEditorBackClick }) => {
-  const { saveNote } = useContext(StateContext);
+  const { saveNote, currentNote, text } = useContext(StateContext);
   const [editorMode, setEditorMode] = useState(EDIT);
 
   return (
@@ -31,7 +31,7 @@ const Editor = ({ viewMode, handleEditorBackClick }) => {
         <div className="flex flex-row gap-x-2">
           <SaveIcon
             className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
-            onClick={() => saveNote()}
+            onClick={() => saveNote(currentNote.id, text)}
           />
           {editorMode !== SPLIT && (
             <EyeIcon
