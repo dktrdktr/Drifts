@@ -12,7 +12,7 @@ const NotebookListItem = ({ book, onClick }) => {
         <span className="ml-3 w-10">{book}</span>
       </div>
 
-      <div class="flex flex-row">
+      <div className="flex flex-row">
         <button>
           <PencilIcon className={"p-4 h-full hover:bg-blue-200 "} />
         </button>

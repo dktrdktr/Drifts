@@ -10,17 +10,28 @@ export default function useApplicationData() {
     currentNote: {},
   });
 
-  const refreshData = () => {
-    axios
-      .get("/notebooks")
-      .then((data) => {
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-          notebooks: data.data.notebooks,
-        }));
-      })
-      .catch((err) => console.log(err));
+  const refreshData = async () => {
+    try {
+      let NotebookData = await axios.get("/notebooks");
+
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        notebooks: NotebookData.data.notebooks,
+      }));
+      // if (state.currentNotebook === {}) {
+      //   console.log(state.currentNotebook);
+      //   let NotesData = await axios.get("/notes");
+
+      //   setState((prev) => ({
+      //     ...prev,
+      //     isLoading: false,
+      //     notebooks: NotesData.data.notes,
+      //   }));
+      // }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
