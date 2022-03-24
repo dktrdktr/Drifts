@@ -19,7 +19,7 @@ export default function StateProvider(props) {
         method: "put",
         params: { id: currentNote.id, content: text },
       });
-      refreshData();
+      refreshData(currentNotebook);
       return res.data;
     } catch (error) {
       return error.response;

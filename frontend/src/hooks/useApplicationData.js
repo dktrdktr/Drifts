@@ -10,7 +10,7 @@ export default function useApplicationData() {
     currentNote: {},
   });
 
-  const refreshData = async () => {
+  const refreshData = async (currentNotebook) => {
     try {
       let NotebookData = await axios.get("/notebooks");
 
@@ -20,11 +20,11 @@ export default function useApplicationData() {
         notebooks: NotebookData.data.notebooks,
       }));
 
-      if (Object.keys(state.currentNotebook).length > 0) {
+      if (currentNotebook) {
         let NotesData = await axios({
           url: "/notes",
           method: "get",
-          params: { id: state.currentNotebook.id },
+          params: { id: currentNotebook.id },
         });
 
         setState((prev) => ({
