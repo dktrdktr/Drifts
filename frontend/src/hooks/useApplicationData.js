@@ -6,20 +6,36 @@ export default function useApplicationData() {
     notes: [],
     text: "",
     isLoading: true,
-    currentNoteId: 0,
+    currentNotebook: {},
+    currentNote: {},
   });
 
-  const refreshData = () => {
-    axios
-      .get("/notebooks")
-      .then((data) => {
+  const refreshData = async () => {
+    try {
+      let NotebookData = await axios.get("/notebooks");
+
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        notebooks: NotebookData.data.notebooks,
+      }));
+
+      if (Object.keys(state.currentNotebook).length > 0) {
+        let NotesData = await axios({
+          url: "/notes",
+          method: "get",
+          params: { id: state.currentNotebook.id },
+        });
+
         setState((prev) => ({
           ...prev,
           isLoading: false,
-          notebooks: data.data.notebooks,
+          notes: NotesData.data.notes,
         }));
-      })
-      .catch((err) => console.log(err));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

@@ -3,6 +3,24 @@ const router = express.Router();
 
 module.exports = (db) => {
   router
+    .get("/", (request, response) => {
+      db.query(
+        `
+    SELECT * FROM notes
+    WHERE notebook_id = $1
+    ORDER BY notes.id
+    `,
+        [request.query.id]
+      )
+        .then((data) => {
+          const notes = data.rows;
+          response.json({ notes });
+        })
+        .catch((err) => {
+          response.status(500).json({ error: err.message });
+        });
+    })
+
     // Update note title / content
     .put("/:id", (request, response) => {
       let setQuery = "SET content = ($2::text)";

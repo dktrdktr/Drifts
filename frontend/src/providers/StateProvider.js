@@ -9,14 +9,15 @@ axios.defaults.baseURL = "http://localhost:3000/";
 export default function StateProvider(props) {
   const { state, setState, refreshData } = useApplicationData();
 
-  const { notebooks, notes, text, isLoading, currentNoteId } = state;
+  const { notebooks, notes, text, isLoading, currentNotebook, currentNote } =
+    state;
 
   const saveNote = async () => {
     try {
       let res = await axios({
-        url: "/notes/" + currentNoteId,
+        url: "/notes/" + currentNote.id,
         method: "put",
-        params: { id: currentNoteId, content: text },
+        params: { id: currentNote.id, content: text },
       });
       refreshData();
       return res.data;
@@ -31,7 +32,8 @@ export default function StateProvider(props) {
     notes,
     text,
     isLoading,
-    currentNoteId,
+    currentNotebook,
+    currentNote,
     saveNote,
   };
 
