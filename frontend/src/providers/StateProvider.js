@@ -9,7 +9,8 @@ axios.defaults.baseURL = "http://localhost:3000/";
 export default function StateProvider(props) {
   const { state, setState, refreshData } = useApplicationData();
 
-  const { notebooks, notes, text, isLoading, currentNote } = state;
+  const { notebooks, notes, text, isLoading, currentNotebook, currentNote } =
+    state;
 
   const saveNote = async () => {
     try {
@@ -31,6 +32,7 @@ export default function StateProvider(props) {
     notes,
     text,
     isLoading,
+    currentNotebook,
     currentNote,
     saveNote,
   };

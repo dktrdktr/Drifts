@@ -21,6 +21,7 @@ const NotebookList = () => {
             setState((prev) => ({
               ...prev,
               notes: item.notes,
+              currentNotebook: item,
             }))
           }
         />
