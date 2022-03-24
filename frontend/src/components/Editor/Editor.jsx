@@ -1,6 +1,8 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
 import { useState } from "react";
+import { StateContext } from "../../providers/StateProvider";
+import { useContext } from "react";
 import {
   EyeIcon,
   CashIcon,
@@ -13,6 +15,7 @@ const EDIT = "EDIT";
 const VIEW = "VIEW";
 
 const Editor = ({ viewMode, handleEditorBackClick }) => {
+  const { saveNote } = useContext(StateContext);
   const [editorMode, setEditorMode] = useState(EDIT);
 
   return (
@@ -26,7 +29,10 @@ const Editor = ({ viewMode, handleEditorBackClick }) => {
         )}
         {!viewMode && <div />}
         <div className="flex flex-row gap-x-2">
-          <SaveIcon className={"h-8 w-8 cursor-pointer hover:text-blue-500"} />
+          <SaveIcon
+            className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
+            onClick={saveNote()}
+          />
           {editorMode !== SPLIT && (
             <EyeIcon
               className={
