@@ -3,8 +3,11 @@ import {
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
+import { StateContext } from "../../providers/StateProvider";
+import { useContext } from "react";
 
-const NoteListItem = ({ title, onClick }) => {
+const NoteListItem = ({ id, title, onClick }) => {
+  const { deleteNote } = useContext(StateContext);
   return (
     <div className="flex flex-row w-full ">
       <div
@@ -20,7 +23,8 @@ const NoteListItem = ({ title, onClick }) => {
           <PencilIcon className={"p-3 h-full hover:bg-blue-200 rounded-lg"} />
         </button>
         <button>
-          <TrashIcon className={"p-3 h-full hover:bg-red-200 rounded-lg"} />
+          <TrashIcon className={"p-3 h-full hover:bg-red-200 rounded-lg"} 
+          onClick={() => deleteNote(id)}/>
         </button>
       </div>
     </div>

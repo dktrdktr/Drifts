@@ -41,6 +41,20 @@ export default function useApplicationData() {
     }
   };
 
+  const deleteNote = async (currentNoteId) => {
+    try {
+      let res = await axios({
+        url: "/notes/" + currentNoteId,
+        method: "delete",
+        params: { id: currentNoteId },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
   const deleteNotebook = async (currentNotebookId) => {
     try {
       let res = await axios({
@@ -55,5 +69,5 @@ export default function useApplicationData() {
     }
   };
 
-  return { state, setState, saveNote, deleteNotebook };
+  return { state, setState, saveNote, deleteNote, deleteNotebook };
 }

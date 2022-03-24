@@ -18,6 +18,7 @@ const NoteList = ({ handleNoteClick }) => {
       return (
         <NoteListItem
           key={item.id}
+          id={item.id}
           title={item.title}
           onClick={() => {
             setState((prev) => ({
