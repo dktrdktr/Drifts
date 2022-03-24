@@ -1,7 +1,12 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
 import { useState } from "react";
-import { EyeIcon, CashIcon, ChevronLeftIcon } from "@heroicons/react/outline";
+import {
+  EyeIcon,
+  CashIcon,
+  ChevronLeftIcon,
+  SaveIcon,
+} from "@heroicons/react/outline";
 
 const SPLIT = "SPLIT";
 const EDIT = "EDIT";
@@ -21,6 +26,7 @@ const Editor = ({ viewMode, handleEditorBackClick }) => {
         )}
         {!viewMode && <div />}
         <div className="flex flex-row gap-x-2">
+          <SaveIcon className={"h-8 w-8 cursor-pointer hover:text-blue-500"} />
           {editorMode !== SPLIT && (
             <EyeIcon
               className={
