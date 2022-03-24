@@ -16,6 +16,7 @@ const NotebookList = () => {
       return (
         <NotebookListItem
           key={item.id}
+          id={item.id}
           book={item.book}
           onClick={() =>
             setState((prev) => ({
