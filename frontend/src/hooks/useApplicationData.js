@@ -41,5 +41,62 @@ export default function useApplicationData() {
     }
   };
 
-  return { state, setState, saveNote };
+  const addNote = async (userId) => {
+    try {
+      let res = await axios({
+        url: "/notes",
+        method: "post",
+        params: { id: userId },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
+  const deleteNote = async (currentNoteId) => {
+    try {
+      let res = await axios({
+        url: "/notes/" + currentNoteId,
+        method: "delete",
+        params: { id: currentNoteId },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
+  const addNotebook = async (userId) => {
+    try {
+      let res = await axios({
+        url: "/notebooks",
+        method: "post",
+        params: { id: userId },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
+  const deleteNotebook = async (currentNotebookId) => {
+    try {
+      let res = await axios({
+        url: "/notebooks/" + currentNotebookId,
+        method: "delete",
+        params: { id: currentNotebookId },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
+  return { state, setState, saveNote, addNote, deleteNote, addNotebook, deleteNotebook };
 }
+

@@ -29,7 +29,7 @@ module.exports = (db) => {
       SET book = $2
       WHERE id = ($1::integer)
       `,
-        [request.params.id]
+        [request.query.id]
       ).then(() => {
         response.status(204).json({});
       });
@@ -38,7 +38,7 @@ module.exports = (db) => {
     // Add new notebook
     .post("/", (request, response) => {
       db.query(`INSERT INTO notebooks (user_id) VALUES ($1::integer)`, [
-        request.params.id,
+        request.query.id,
       ]).then(() => {
         response.status(204).json({});
       });
@@ -47,7 +47,7 @@ module.exports = (db) => {
     // Delete notebook
     .delete("/:id", (request, response) => {
       db.query(`DELETE FROM notebooks WHERE id = $1::integer`, [
-        request.params.id,
+        request.query.id,
       ]).then(() => {
         response.status(204).json({});
       });

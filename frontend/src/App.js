@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { io } from "socket.io-client";
+// import React, { useEffect } from "react";
+// import { io } from "socket.io-client";
 
 import NotebookList from "./components/Notebooks/NotebookList";
 import NoteList from "./components/Notes/NoteList";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
 import StateProvider from "./providers/StateProvider";
 
-const ENDPOINT = "http://localhost:3000";
+// const ENDPOINT = "http://localhost:3000";
 
 const MENU = "MENU";
 const EDITOR = "EDITOR";
@@ -19,10 +19,10 @@ function App() {
 
   const { width } = useWindowWidth();
 
-  useEffect(() => {
-    const socket = io(ENDPOINT);
-    socket.on("connect", () => console.log(socket.id));
-  }, []);
+  // useEffect(() => {
+  //   const socket = io(ENDPOINT);
+  //   socket.on("connect", () => console.log(socket.id));
+  // }, []);
 
   const handleNoteClick = () => {
     setViewMode(EDITOR);
