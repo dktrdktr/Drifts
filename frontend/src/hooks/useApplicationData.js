@@ -6,6 +6,7 @@ export default function useApplicationData() {
     notes: [],
     text: "",
     isLoading: true,
+    currentNoteId: 0,
   });
 
   useEffect(() => {
