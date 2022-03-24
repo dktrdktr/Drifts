@@ -6,7 +6,7 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NoteList = ({ handleNoteClick }) => {
-  const { notebooks, currentNotebookId, setState } = useContext(StateContext);
+  const { notebooks, currentNotebookId, setState, addNote } = useContext(StateContext);
 
   let renderNotes = null;
 
@@ -38,7 +38,8 @@ const NoteList = ({ handleNoteClick }) => {
     <div className="w-1/2">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
-      {renderNotes && <AddButton onClick={() => console.log("test")}/>}
+      {renderNotes && <AddButton onClick={() => addNote(1)} />}
+      {/* set AddNote argument userId = 1 for testing */}
     </div>
   );
 };

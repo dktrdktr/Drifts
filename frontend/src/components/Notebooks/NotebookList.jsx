@@ -6,7 +6,7 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NotebookList = () => {
-  const { notebooks, setState } = useContext(StateContext);
+  const { notebooks, setState, addNotebook } = useContext(StateContext);
 
   const renderNotebooks = (userId) => {
     const filteredNotebooks = notebooks.filter(
@@ -34,7 +34,8 @@ const NotebookList = () => {
     <div className="w-1/2">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks(1)}
-      {notebooks && <AddButton onClick={() => console.log("test")}/>}
+      {notebooks && <AddButton onClick={() => addNotebook(1)} />}
+      {/* set AddNotebook argument userId = 1 for testing */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const StateContext = createContext();
 axios.defaults.baseURL = "http://localhost:3000/";
 
 export default function StateProvider(props) {
-  const { state, setState, saveNote, deleteNote, deleteNotebook } = useApplicationData();
+  const { state, setState, saveNote, addNote, deleteNote, addNotebook, deleteNotebook } = useApplicationData();
 
   const { notebooks, text, isLoading, currentNotebookId, currentNote } = state;
 
@@ -19,7 +19,9 @@ export default function StateProvider(props) {
     currentNotebookId,
     currentNote,
     saveNote,
+    addNote,
     deleteNote,
+    addNotebook,
     deleteNotebook,
   };
 
