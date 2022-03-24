@@ -29,7 +29,7 @@ const NoteList = ({ handleNoteClick }) => {
   }
 
   return (
-    <div>
+    <div className="w-1/2">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
     </div>

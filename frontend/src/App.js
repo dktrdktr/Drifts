@@ -33,14 +33,12 @@ function App() {
 
   return (
     <StateProvider>
-      <div className="container mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
+      <div className="mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
         {viewMode === MENU && width < MD_BREAKPOINT && (
-          <>
-            <div className="flex flex-row p-2 space-x-3">
+            <div className="flex flex-row w-full p-2 space-x-3">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
-          </>
         )}
         {viewMode === EDITOR && width < MD_BREAKPOINT && (
           <div className="w-full md:w-8/12 h-full p-2">
@@ -52,11 +50,11 @@ function App() {
         )}
         {width > MD_BREAKPOINT && (
           <>
-            <div className="flex flex-row mw-100 items-start p-2 space-x-3">
+            <div className="flex flex-row w-1/3 p-2 space-x-3">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
-            <div className="w-full md:w-8/12 h-full p-2">
+            <div className="w-2/3 md:w-8/12 h-full p-2">
               <Editor />
             </div>
           </>

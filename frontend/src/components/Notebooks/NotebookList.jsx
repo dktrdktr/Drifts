@@ -30,7 +30,7 @@ const NotebookList = () => {
   };
 
   return (
-    <div>
+    <div className="w-1/2">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks(1)}
     </div>
