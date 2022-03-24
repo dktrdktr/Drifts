@@ -19,6 +19,7 @@ const NoteList = ({ handleNoteClick }) => {
             setState((prev) => ({
               ...prev,
               text: item.content,
+              currentNoteId: item.id,
             }));
             handleNoteClick();
           }}

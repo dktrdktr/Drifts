@@ -3,15 +3,23 @@ const router = express.Router();
 
 module.exports = (db) => {
   router
-    // Update note title
+    // Update note title / content
     .put("/:id", (request, response) => {
+      let setQuery = "SET content = ($2::text)";
+      let queryArr = [request.query.id, request.query.content];
+
+      if (request.query.title) {
+        setQuery = "SET title = ($2::text)";
+        queryArr = [request.query.id, request.query.title];
+      }
+
       db.query(
         `
-      UPDATE notes
-      SET title = $2
-      WHERE id = ($1::integer)
-      `,
-        [request.params.id]
+            UPDATE notes
+            ${setQuery}
+            WHERE id = ($1::integer)
+            `,
+        queryArr
       ).then(() => {
         response.status(204).json({});
       });
