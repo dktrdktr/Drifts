@@ -19,16 +19,20 @@ export default function useApplicationData() {
         isLoading: false,
         notebooks: NotebookData.data.notebooks,
       }));
-      // if (state.currentNotebook === {}) {
-      //   console.log(state.currentNotebook);
-      //   let NotesData = await axios.get("/notes");
 
-      //   setState((prev) => ({
-      //     ...prev,
-      //     isLoading: false,
-      //     notebooks: NotesData.data.notes,
-      //   }));
-      // }
+      if (Object.keys(state.currentNotebook).length > 0) {
+        let NotesData = await axios({
+          url: "/notes",
+          method: "get",
+          params: { id: state.currentNotebook.id },
+        });
+
+        setState((prev) => ({
+          ...prev,
+          isLoading: false,
+          notes: NotesData.data.notes,
+        }));
+      }
     } catch (err) {
       console.log(err);
     }

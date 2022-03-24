@@ -3,7 +3,7 @@ const router = express.Router();
 
 module.exports = (db) => {
   router
-    .get("/", (req, res) => {
+    .get("/", (request, response) => {
       db.query(
         `
       SELECT user_id, notebooks.id, notebooks.book, json_agg(notes) as notes FROM notebooks
@@ -14,10 +14,10 @@ module.exports = (db) => {
       )
         .then((data) => {
           const notebooks = data.rows;
-          res.json({ notebooks });
+          response.json({ notebooks });
         })
         .catch((err) => {
-          res.status(500).json({ error: err.message });
+          response.status(500).json({ error: err.message });
         });
     })
 

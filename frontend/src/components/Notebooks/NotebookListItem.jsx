@@ -3,7 +3,6 @@ import { NewspaperIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
 const NotebookListItem = ({ book, onClick }) => {
   return (
     <div className="flex flex-row w-full ">
-      
       <div
         onClick={onClick}
         className="flex items-center text-sm py-4 px-6 h-12 rounded-lg hover:bg-gray-100 cursor-pointer overflow-hidden"
@@ -22,7 +21,6 @@ const NotebookListItem = ({ book, onClick }) => {
       </div>
     </div>
   );
-
 };
 
 export default NotebookListItem;
