@@ -8,7 +8,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
 
   return (
     <div
-      className="shadow hover:shadow-2xl flex flex-row items-center justify-between w-full hover:bg-gray-200 rounded-lg"
+      className="hover:shadow-sm flex flex-row items-center justify-between w-full hover:bg-gray-200 rounded-lg"
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
