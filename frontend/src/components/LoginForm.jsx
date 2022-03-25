@@ -14,10 +14,12 @@ const LoginForm = ({ setUserAuth }) => {
         email,
         password,
       };
-      const response = await axios.post(`/authUser`, { user });
-      if (response) {
+      const response = await axios.post(`/login`, { user });
+      if (response.status === 200) {
         setLoginError(false);
         setUserAuth(true);
+      } else {
+        new Error("Credentials invalid");
       }
     } catch {
       setLoginError(true);
