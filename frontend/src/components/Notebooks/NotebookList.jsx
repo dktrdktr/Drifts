@@ -23,6 +23,8 @@ const NotebookList = () => {
             setState((prev) => ({
               ...prev,
               currentNotebookId: item.id,
+              currentNote: {},
+              text: "",
             }))
           }
         />
