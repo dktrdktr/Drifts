@@ -1,4 +1,5 @@
-// import React, { useEffect } from "react";
+import React, { useEffect } from "react";
+import Cookies from "js-cookie";
 // import { io } from "socket.io-client";
 
 import NotebookList from "./components/Notebooks/NotebookList";
@@ -26,6 +27,11 @@ function App() {
   //   socket.on("connect", () => console.log(socket.id));
   // }, []);
 
+  useEffect(() => {
+    const user = Cookies.get("id") ? true : false;
+    setUserAuth(user);
+  }, []);
+
   const handleNoteClick = () => {
     setViewMode(EDITOR);
   };
@@ -35,7 +41,7 @@ function App() {
   if (!userAuth) {
     return (
       <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gradient-to-r from-zinc-100 to-zinc-300">
-        <LoginForm setUserAuth={setUserAuth} />;
+        <LoginForm setUserAuth={setUserAuth} />
       </div>
     );
   }

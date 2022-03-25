@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Heading from "./Heading";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const LoginForm = ({ setUserAuth }) => {
   const [loginError, setLoginError] = useState(false);
@@ -16,6 +17,7 @@ const LoginForm = ({ setUserAuth }) => {
       };
       const response = await axios.post(`/login`, { user });
       if (response.status === 200) {
+        Cookies.set("id", response.data.id);
         setLoginError(false);
         setUserAuth(true);
       } else {
