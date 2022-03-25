@@ -6,7 +6,8 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NoteList = ({ handleNoteClick }) => {
-  const { notebooks, currentNotebookId, setState, addNote } = useContext(StateContext);
+  const { notebooks, currentNotebookId, setState, addNote } =
+    useContext(StateContext);
 
   let renderNotes = null;
 
@@ -15,23 +16,24 @@ const NoteList = ({ handleNoteClick }) => {
       (notebook) => notebook.id === currentNotebookId
     );
 
-    renderNotes = notebook.notes.map((item) => {
-      return (
-        <NoteListItem
-          key={item.id}
-          id={item.id}
-          title={item.title}
-          onClick={() => {
-            setState((prev) => ({
-              ...prev,
-              text: item.content,
-              currentNote: item,
-            }));
-            handleNoteClick();
-          }}
-        />
-      );
-    });
+    if (notebook.notes[0] !== null)
+      renderNotes = notebook.notes.map((item) => {
+        return (
+          <NoteListItem
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            onClick={() => {
+              setState((prev) => ({
+                ...prev,
+                text: item.content,
+                currentNote: item,
+              }));
+              handleNoteClick();
+            }}
+          />
+        );
+      });
   }
 
   return (
