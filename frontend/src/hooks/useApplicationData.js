@@ -90,6 +90,10 @@ export default function useApplicationData() {
         method: "delete",
         params: { id: currentNotebookId },
       });
+      setState((prev) => ({
+        ...prev,
+        currentNotebookId: null,
+      }));
       refreshData();
       return res.data;
     } catch (error) {
@@ -97,6 +101,13 @@ export default function useApplicationData() {
     }
   };
 
-  return { state, setState, saveNote, addNote, deleteNote, addNotebook, deleteNotebook };
+  return {
+    state,
+    setState,
+    saveNote,
+    addNote,
+    deleteNote,
+    addNotebook,
+    deleteNotebook,
+  };
 }
-
