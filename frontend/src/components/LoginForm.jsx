@@ -1,17 +1,24 @@
 import { useState } from "react";
 import Heading from "./Heading";
+import axios from "axios";
 
 const LoginForm = ({ setUserAuth }) => {
   const [loginError, setLoginError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // use a helper function to verify login
     try {
-      console.log("login succesful");
-      throw new Error("Credentials invalid");
-      // setLoginError(false);
-      // setUserAuth(true);
+      const user = {
+        email,
+        password,
+      };
+      const response = await axios.post(`/authUser`, { user });
+      if (response) {
+        setLoginError(false);
+        setUserAuth(true);
+      }
     } catch {
       setLoginError(true);
     }
@@ -29,6 +36,8 @@ const LoginForm = ({ setUserAuth }) => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             />
@@ -43,21 +52,23 @@ const LoginForm = ({ setUserAuth }) => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
             />
           </div>
-          {loginError && (
-            <p className="mb-2 text-sm text-red-600">
-              <span className="font-medium">Oops!</span> Credentials invalid!
-            </p>
-          )}
           <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
             Submit
           </button>
+          {loginError && (
+            <p className="my-2 text-sm text-red-600">
+              <span className="font-medium">Oops!</span> Credentials invalid!
+            </p>
+          )}
         </form>
       </div>
     </div>
