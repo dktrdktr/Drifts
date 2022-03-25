@@ -8,7 +8,7 @@ import { useContext, useState } from "react";
 
 const NoteListItem = ({ id, title, onClick }) => {
   const [isHover, setHover] = useState(false);
-  const { deleteNote } = useContext(StateContext);
+  const { editNote, deleteNote } = useContext(StateContext);
 
   return (
     <div
@@ -29,6 +29,9 @@ const NoteListItem = ({ id, title, onClick }) => {
       >
         <PencilIcon
           className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
+          onClick={() => {
+            editNote(id, prompt("Please enter a new note title:", title));
+          }}
         />
         <TrashIcon
           className={"p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"}
