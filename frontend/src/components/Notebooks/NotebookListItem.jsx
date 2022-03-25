@@ -9,13 +9,11 @@ const NotebookListItem = ({ id, book, onClick }) => {
   return (
     <div
       className="hover:shadow-sm flex flex-row items-center justify-between w-full hover:bg-gray-200 rounded-lg"
+      onClick={onClick}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
-      <div
-        className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer"
-        onClick={onClick}
-      >
+      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer">
         <NewspaperIcon className={"h-4 w-4 block mr-2"} />
         <span className="whitespace-nowrap text-ellipsis">{book}</span>
       </div>
