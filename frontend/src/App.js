@@ -4,6 +4,7 @@
 import NotebookList from "./components/Notebooks/NotebookList";
 import NoteList from "./components/Notes/NoteList";
 import Editor from "./components/Editor/Editor";
+import LoginForm from "./components/LoginForm";
 import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
 import StateProvider from "./providers/StateProvider";
@@ -16,6 +17,7 @@ const XL_BREAKPOINT = 1280;
 
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
+  const [userAuth, setUserAuth] = useState(false);
 
   const { width } = useWindowWidth();
 
@@ -30,7 +32,13 @@ function App() {
   const handleEditorBackClick = () => {
     setViewMode(MENU);
   };
-
+  if (!userAuth) {
+    return (
+      <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gradient-to-r from-zinc-100 to-zinc-300">
+        <LoginForm setUserAuth={setUserAuth} />;
+      </div>
+    );
+  }
   return (
     <StateProvider>
       <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gradient-to-r from-zinc-100 to-zinc-300">
