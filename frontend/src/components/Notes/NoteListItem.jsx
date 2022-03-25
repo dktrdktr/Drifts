@@ -30,7 +30,10 @@ const NoteListItem = ({ id, title, onClick }) => {
         <PencilIcon
           className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
           onClick={() => {
-            editNote(id, prompt("Please enter a new note title:", title));
+            const newValue = prompt("Please enter a new note title:", title);
+            if (newValue) {
+              editNote(id, newValue);
+            }
           }}
         />
         <TrashIcon
