@@ -35,7 +35,7 @@ function App() {
     <StateProvider>
       <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gray-100">
         {viewMode === MENU && width < XL_BREAKPOINT && (
-            <div className="flex flex-row w-full p-2">
+            <div className="flex flex-row w-full md:w-6/12 p-2">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
@@ -50,11 +50,11 @@ function App() {
         )}
         {width > XL_BREAKPOINT && (
           <>
-            <div className="flex flex-row w-1/3 p-2 md:w-4/12 space-x-3">
+            <div className="flex flex-row w-2/5 p-2 space-x-3">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
-            <div className="w-2/3 md:w-8/12 h-full py-6">
+            <div className="w-3/5 h-full py-6">
               <Editor />
             </div>
           </>
