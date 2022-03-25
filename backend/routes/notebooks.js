@@ -6,7 +6,7 @@ module.exports = (db) => {
     .get("/", (request, response) => {
       db.query(
         `
-      SELECT user_id, notebooks.id, notebooks.book, json_agg(notes) as notes FROM notebooks
+      SELECT user_id, notebooks.id, notebooks.book, json_agg(notes ORDER BY notes.id ASC) as notes FROM notebooks
       LEFT OUTER JOIN notes ON notes.notebook_id = notebooks.id
       GROUP BY notebooks.id
       ORDER BY notebooks.id
@@ -18,6 +18,7 @@ module.exports = (db) => {
         })
         .catch((err) => {
           response.status(500).json({ error: err.message });
+          console.log(err)
         });
     })
 
