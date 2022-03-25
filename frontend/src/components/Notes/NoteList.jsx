@@ -38,8 +38,7 @@ const NoteList = ({ handleNoteClick }) => {
     <div className="bg-white p-4 rounded w-full">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
-      {renderNotes && <AddButton onClick={() => addNote(1)} />}
-      {/* set AddNote argument userId = 1 for testing */}
+      {renderNotes && <AddButton onClick={() => addNote(currentNotebookId)} />}
     </div>
   );
 };
