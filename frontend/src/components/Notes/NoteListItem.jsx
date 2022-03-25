@@ -12,7 +12,7 @@ const NoteListItem = ({ id, title, onClick }) => {
 
   return (
     <div
-      className="flex flex-row items-center justify-between w-full hover:bg-gray-100 rounded-lg"
+      className="shadow hover:shadow-2xl flex flex-row items-center justify-between w-full hover:bg-gray-200 rounded-lg"
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
     >
@@ -30,10 +30,10 @@ const NoteListItem = ({ id, title, onClick }) => {
         }`}
       >
         <PencilIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
+          className={"p-1 w-6 h-6 text-black hover:bg-blue-300 rounded-lg"}
         />
         <TrashIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"}
+          className={"p-1 w-6 h-6 text-black hover:bg-red-300 rounded-lg"}
           onClick={() => deleteNote(id)}
         />
       </div>
