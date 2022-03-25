@@ -35,7 +35,7 @@ const NoteList = ({ handleNoteClick }) => {
   }
 
   return (
-    <div className="rounded-3xl bg-white p-4 rounded w-full">
+    <div className="shadow hover:shadow-2xl rounded-3xl bg-white p-4 rounded w-full">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
       {renderNotes && <AddButton onClick={() => addNote(currentNotebookId)} />}

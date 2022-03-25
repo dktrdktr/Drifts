@@ -33,12 +33,14 @@ function App() {
 
   return (
     <StateProvider>
-      <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-rose-50">
+      <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6  bg-gradient-to-r from-zinc-100 to-zinc-300 ">
         {viewMode === MENU && width < XL_BREAKPOINT && (
             <div className="flex flex-row w-full md:w-6/12 p-2">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
+
+            
         )}
         {viewMode === EDITOR && width < XL_BREAKPOINT && (
           <div className=" w-full md:w-8/12 h-full p-4">
