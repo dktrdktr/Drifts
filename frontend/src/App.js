@@ -12,7 +12,7 @@ import StateProvider from "./providers/StateProvider";
 
 const MENU = "MENU";
 const EDITOR = "EDITOR";
-const MD_BREAKPOINT = 768;
+const XL_BREAKPOINT = 1280;
 
 function App() {
   const [viewMode, setViewMode] = useState(MENU);
@@ -33,28 +33,28 @@ function App() {
 
   return (
     <StateProvider>
-      <div className="mx-auto h-full flex flex-row justify-center py-6 md:px-6 space-x-8">
-        {viewMode === MENU && width < MD_BREAKPOINT && (
-            <div className="flex flex-row w-full p-2 space-x-3">
+      <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gray-100">
+        {viewMode === MENU && width < XL_BREAKPOINT && (
+            <div className="flex flex-row w-full p-2">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
         )}
-        {viewMode === EDITOR && width < MD_BREAKPOINT && (
-          <div className="w-full md:w-8/12 h-full p-2">
+        {viewMode === EDITOR && width < XL_BREAKPOINT && (
+          <div className="w-full md:w-8/12 h-full p-4">
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
             />
           </div>
         )}
-        {width > MD_BREAKPOINT && (
+        {width > XL_BREAKPOINT && (
           <>
-            <div className="flex flex-row w-1/3 p-2 space-x-3">
+            <div className="flex flex-row w-1/3 p-2 md:w-4/12 space-x-3">
               <NotebookList />
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
-            <div className="w-2/3 md:w-8/12 h-full p-2">
+            <div className="w-2/3 md:w-8/12 h-full py-6">
               <Editor />
             </div>
           </>

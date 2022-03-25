@@ -35,7 +35,7 @@ const NoteList = ({ handleNoteClick }) => {
   }
 
   return (
-    <div className="w-1/2">
+    <div className="bg-white p-4 rounded w-full">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
       {renderNotes && <AddButton onClick={() => addNote(1)} />}

@@ -31,7 +31,7 @@ const NotebookList = () => {
   };
 
   return (
-    <div className="w-1/2">
+    <div className="bg-white p-4 rounded w-full">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks(1)}
       {notebooks && <AddButton onClick={() => addNotebook(1)} />}
