@@ -83,6 +83,20 @@ export default function useApplicationData() {
     }
   };
 
+  const editNotebook = async (notebookId, book) => {
+    try {
+      let res = await axios({
+        url: "/notebooks/" + notebookId,
+        method: "put",
+        params: { id: notebookId, book: book },
+      });
+      refreshData();
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  };
+
   const deleteNotebook = async (currentNotebookId) => {
     try {
       let res = await axios({
@@ -108,6 +122,7 @@ export default function useApplicationData() {
     addNote,
     deleteNote,
     addNotebook,
+    editNotebook,
     deleteNotebook,
   };
 }

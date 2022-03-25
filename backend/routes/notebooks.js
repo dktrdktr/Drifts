@@ -18,7 +18,7 @@ module.exports = (db) => {
         })
         .catch((err) => {
           response.status(500).json({ error: err.message });
-          console.log(err)
+          console.log(err);
         });
     })
 
@@ -30,7 +30,7 @@ module.exports = (db) => {
       SET book = $2
       WHERE id = ($1::integer)
       `,
-        [request.query.id]
+        [request.query.id, request.query.book]
       ).then(() => {
         response.status(204).json({});
       });
