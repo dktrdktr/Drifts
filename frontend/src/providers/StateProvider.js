@@ -1,10 +1,7 @@
-import axios from "axios";
 import { createContext } from "react";
 import useApplicationData from "../hooks/useApplicationData";
 
 export const StateContext = createContext();
-
-axios.defaults.baseURL = "http://localhost:3000/";
 
 export default function StateProvider(props) {
   const {
@@ -19,7 +16,8 @@ export default function StateProvider(props) {
     deleteNotebook,
   } = useApplicationData();
 
-  const { notebooks, text, isLoading, currentNotebookId, currentNote } = state;
+  const { notebooks, text, isLoading, currentNotebookId, currentNote, userId } =
+    state;
 
   const stateProviderData = {
     setState,
@@ -28,6 +26,7 @@ export default function StateProvider(props) {
     isLoading,
     currentNotebookId,
     currentNote,
+    userId,
     saveNote,
     addNote,
     editNote,

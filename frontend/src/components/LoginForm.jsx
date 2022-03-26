@@ -16,7 +16,6 @@ const LoginForm = ({ setUserAuth }) => {
         method: "post",
         params: { email: email, password: password },
       });
-      console.log(login);
       if (login.data.id && login.data.id !== undefined) {
         Cookies.set("id", login.data.id);
         setLoginError(false);
