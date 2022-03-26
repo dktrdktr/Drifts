@@ -8,24 +8,27 @@ import {
   CashIcon,
   ChevronLeftIcon,
   SaveIcon,
+  LogoutIcon,
 } from "@heroicons/react/outline";
 
 const SPLIT = "SPLIT";
 const EDIT = "EDIT";
 const VIEW = "VIEW";
 
-const Editor = ({ viewMode, handleEditorBackClick }) => {
-  const { saveNote, currentNote, text } = useContext(StateContext);
+const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
+  const { saveNote, logOut, currentNote, text } = useContext(StateContext);
   const [editorMode, setEditorMode] = useState(EDIT);
 
   return (
     <>
       <div className="w-full h-1/12 flex justify-between">
         {viewMode && viewMode === "EDITOR" && (
-          <ChevronLeftIcon
-            className="h-6 w-6 cursor-pointer hover:text-blue-500"
-            onClick={() => handleEditorBackClick()}
-          />
+          <div className="flex flex-row space-x-4">
+            <ChevronLeftIcon
+              className="h-8 w-8 cursor-pointer hover:text-blue-500"
+              onClick={() => handleEditorBackClick()}
+            />
+          </div>
         )}
         {!viewMode && <div />}
         <div className="flex flex-row gap-x-2">
@@ -75,6 +78,16 @@ const Editor = ({ viewMode, handleEditorBackClick }) => {
           </>
         )}
       </section>
+      <div className="flex justify-between">
+        <br />
+        <LogoutIcon
+          className="h-8 w-8 cursor-pointer hover:text-red-500"
+          onClick={() => {
+            setUserAuth(false);
+            logOut();
+          }}
+        />
+      </div>
     </>
   );
 };

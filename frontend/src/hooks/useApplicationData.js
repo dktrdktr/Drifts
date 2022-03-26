@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
+
+axios.defaults.baseURL = "http://localhost:3000/";
 
 export default function useApplicationData() {
   const [state, setState] = useState({
@@ -21,6 +24,7 @@ export default function useApplicationData() {
         ...prev,
         isLoading: false,
         notebooks: NotebookData.data.notebooks,
+        userId: Number(Cookies.get("id")),
       }));
     } catch (err) {
       console.log(err);
@@ -129,7 +133,13 @@ export default function useApplicationData() {
     }
   };
 
+  const logOut = () => {
+    Cookies.remove("id", { path: "" });
+    refreshData();
+  };
+
   return {
+    logOut,
     state,
     setState,
     saveNote,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Heading from "./Heading";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const LoginForm = ({ setUserAuth }) => {
   const [loginError, setLoginError] = useState(false);
@@ -10,12 +11,13 @@ const LoginForm = ({ setUserAuth }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = {
-        email,
-        password,
-      };
-      const response = await axios.post(`/login`, { user });
-      if (response.status === 200) {
+      const login = await axios({
+        url: "/login",
+        method: "post",
+        params: { email: email, password: password },
+      });
+      if (login.data.id && login.data.id !== undefined) {
+        Cookies.set("id", login.data.id);
         setLoginError(false);
         setUserAuth(true);
       } else {

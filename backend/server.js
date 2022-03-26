@@ -37,7 +37,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRoutes(db));
 app.use("/notebooks", notebooksRoutes(db));
 app.use("/notes", notesRoutes(db));
-app.use("/login", loginRoutes());
+app.use("/login", loginRoutes(db));
 
 // io.on("connection", (socket) => {
 //   console.log("client connected: ", socket.id);
