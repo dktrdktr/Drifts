@@ -60,7 +60,7 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
           />
         </div>
       </div>
-      <section className="w-full h-4/5 flex flex-column">
+      <section className="w-full h-4/5 flex flex-column space-x-2">
         {editorMode === SPLIT && (
           <>
             <MarkedInput />

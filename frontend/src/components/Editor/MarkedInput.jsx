@@ -14,7 +14,7 @@ const MarkedInput = () => {
 
   return (
     <div className="w-full h-full py-6">
-      <div className="rounded-3xl h-full max-w-[60ch] mx-auto border-2 p-4 bg-white">
+      <div className="shadow rounded-xl h-full max-w-[60ch] mx-auto p-4 bg-white">
         <textarea
           name=""
           id=""

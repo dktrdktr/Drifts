@@ -33,7 +33,7 @@ const NotebookList = () => {
   };
 
   return (
-    <div className="shadow rounded-3xl bg-white p-4 rounded w-full overflow-y-auto">
+    <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks(userId)}
       {notebooks && <AddButton onClick={() => addNotebook(userId)} />}
