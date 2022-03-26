@@ -133,7 +133,13 @@ export default function useApplicationData() {
     }
   };
 
+  const logOut = () => {
+    Cookies.remove("id", { path: "" });
+    refreshData();
+  };
+
   return {
+    logOut,
     state,
     setState,
     saveNote,

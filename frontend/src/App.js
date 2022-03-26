@@ -59,6 +59,7 @@ function App() {
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}
+              setUserAuth={setUserAuth}
             />
           </div>
         )}
@@ -69,7 +70,7 @@ function App() {
               <NoteList handleNoteClick={handleNoteClick} />
             </div>
             <div className="w-3/5 h-full py-6">
-              <Editor />
+              <Editor setUserAuth={setUserAuth} />
             </div>
           </>
         )}

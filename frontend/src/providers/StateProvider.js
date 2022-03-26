@@ -14,6 +14,7 @@ export default function StateProvider(props) {
     addNotebook,
     editNotebook,
     deleteNotebook,
+    logOut,
   } = useApplicationData();
 
   const { notebooks, text, isLoading, currentNotebookId, currentNote, userId } =
@@ -34,6 +35,7 @@ export default function StateProvider(props) {
     addNotebook,
     editNotebook,
     deleteNotebook,
+    logOut,
   };
 
   return (
