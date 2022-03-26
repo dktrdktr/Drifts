@@ -8,7 +8,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
 
   return (
     <div
-      className="hover:shadow-sm flex flex-row items-center justify-between w-full hover:bg-gray-200 rounded-lg"
+      className="hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg"
       onClick={onClick}
       onMouseOver={() => setHover(true)}
       onMouseOut={() => setHover(false)}
@@ -25,7 +25,8 @@ const NotebookListItem = ({ id, book, onClick }) => {
       >
         <PencilIcon
           className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             const newValue = prompt("Please enter a new notebook name:", book);
             if (newValue) {
               editNotebook(id, newValue);
@@ -34,7 +35,10 @@ const NotebookListItem = ({ id, book, onClick }) => {
         />
         <TrashIcon
           className={"p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"}
-          onClick={() => deleteNotebook(id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            deleteNotebook(id);
+          }}
         />
       </div>
     </div>

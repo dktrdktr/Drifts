@@ -7,7 +7,9 @@ const AddButton = ({ onClick }) => {
       onClick={onClick}
     >
       <PlusCircleIcon
-        className={"p-2 h-10 w-full hover:bg-blue-200 rounded-lg"}
+        className={
+          "p-2 h-10 w-full text-zinc-300 hover:bg-blue-200 hover:text-black rounded-lg"
+        }
       />
     </div>
   );
