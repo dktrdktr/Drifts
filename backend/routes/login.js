@@ -12,7 +12,7 @@ module.exports = (db) => {
     ).then((data) => {
       if (data.rows.length > 0) {
         const user = data.rows[0];
-        response.status(200).json({ id: 1 }); // Change 1 to user.id
+        response.status(200).json({ id: user.id });
       } else {
         response.status(401).json({});
       }
