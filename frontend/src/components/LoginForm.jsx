@@ -11,13 +11,14 @@ const LoginForm = ({ setUserAuth }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = {
-        email,
-        password,
-      };
-      const response = await axios.post(`/login`, { user });
-      if (response.status === 200) {
-        Cookies.set("id", response.data.id);
+      const login = await axios({
+        url: "/login",
+        method: "post",
+        params: { email: email, password: password },
+      });
+      console.log(login);
+      if (login.data.id && login.data.id !== undefined) {
+        Cookies.set("id", login.data.id);
         setLoginError(false);
         setUserAuth(true);
       } else {
