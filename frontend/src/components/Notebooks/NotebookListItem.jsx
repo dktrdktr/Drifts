@@ -48,6 +48,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
               ref={nameInput}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               onBlur={handleInputCancel}
             />
           </form>

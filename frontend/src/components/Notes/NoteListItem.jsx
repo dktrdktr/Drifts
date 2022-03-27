@@ -51,6 +51,7 @@ const NoteListItem = ({ id, title, onClick }) => {
               ref={nameInput}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               onBlur={handleInputCancel}
             />
           </form>
