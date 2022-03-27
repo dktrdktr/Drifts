@@ -29,12 +29,12 @@ const NotebookListItem = ({ id, book, onClick }) => {
 
   return (
     <div
-      className={`hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg ${
+      className={`hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg cursor-pointer ${
         id === currentNotebookId ? "bg-gray-200" : ""
       } `}
       onClick={onClick}
     >
-      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer">
+      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg">
         <NewspaperIcon className={"h-4 w-4 block mr-2"} />
         {!editNameMode && (
           <span className="whitespace-nowrap text-ellipsis">{book}</span>
