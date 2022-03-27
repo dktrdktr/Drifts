@@ -13,18 +13,46 @@ export default function useApplicationData() {
   });
 
   useEffect(() => {
-    refreshData();
+    initialLoad();
   }, []);
 
-  const refreshData = async () => {
+  const initialLoad = async () => {
     try {
-      let NotebookData = await axios.get("/notebooks");
+      const userId = Number(Cookies.get("id"));
+      setState((prev) => ({
+        ...prev,
+        isLoading: false,
+        userId: userId,
+      }));
+      if (userId && userId > 0) {
+        const NotebookData = await axios({
+          url: "/notebooks",
+          method: "get",
+          params: { userId: userId },
+        });
+
+        setState((prev) => ({
+          ...prev,
+          notebooks: NotebookData.data.notebooks,
+        }));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const refreshData = async (userId) => {
+    try {
+      const NotebookData = await axios({
+        url: "/notebooks",
+        method: "get",
+        params: { userId: userId },
+      });
 
       setState((prev) => ({
         ...prev,
         isLoading: false,
         notebooks: NotebookData.data.notebooks,
-        userId: Number(Cookies.get("id")),
       }));
     } catch (err) {
       console.log(err);
@@ -33,12 +61,12 @@ export default function useApplicationData() {
 
   const saveNote = async (currentNoteId, text) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notes/" + currentNoteId,
         method: "put",
         params: { id: currentNoteId, content: text },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -47,12 +75,12 @@ export default function useApplicationData() {
 
   const addNote = async (userId) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notes",
         method: "post",
         params: { id: userId },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -61,12 +89,12 @@ export default function useApplicationData() {
 
   const editNote = async (noteId, title) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notes/" + noteId,
         method: "put",
         params: { id: noteId, title: title },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -75,12 +103,12 @@ export default function useApplicationData() {
 
   const deleteNote = async (currentNoteId) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notes/" + currentNoteId,
         method: "delete",
         params: { id: currentNoteId },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -89,12 +117,12 @@ export default function useApplicationData() {
 
   const addNotebook = async (userId) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notebooks",
         method: "post",
         params: { id: userId },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -103,12 +131,12 @@ export default function useApplicationData() {
 
   const editNotebook = async (notebookId, book) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notebooks/" + notebookId,
         method: "put",
         params: { id: notebookId, book: book },
       });
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -117,7 +145,7 @@ export default function useApplicationData() {
 
   const deleteNotebook = async (currentNotebookId) => {
     try {
-      let res = await axios({
+      const res = await axios({
         url: "/notebooks/" + currentNotebookId,
         method: "delete",
         params: { id: currentNotebookId },
@@ -126,7 +154,7 @@ export default function useApplicationData() {
         ...prev,
         currentNotebookId: null,
       }));
-      refreshData();
+      refreshData(state.userId);
       return res.data;
     } catch (error) {
       return error.response;
@@ -135,7 +163,7 @@ export default function useApplicationData() {
 
   const logOut = () => {
     Cookies.remove("id", { path: "" });
-    refreshData();
+    refreshData(state.userId);
   };
 
   return {

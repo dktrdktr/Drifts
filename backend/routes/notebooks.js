@@ -8,9 +8,11 @@ module.exports = (db) => {
         `
       SELECT user_id, notebooks.id, notebooks.book, json_agg(notes ORDER BY notes.id ASC) as notes FROM notebooks
       LEFT OUTER JOIN notes ON notes.notebook_id = notebooks.id
+      WHERE user_id = $1
       GROUP BY notebooks.id
       ORDER BY notebooks.id
-      `
+      `,
+        [request.query.userId]
       )
         .then((data) => {
           const notebooks = data.rows;

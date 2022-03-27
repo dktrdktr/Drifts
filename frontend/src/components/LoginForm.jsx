@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Heading from "./Heading";
 import axios from "axios";
 import Cookies from "js-cookie";
 
