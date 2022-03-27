@@ -23,12 +23,12 @@ const NoteListItem = ({ id, title, onClick }) => {
       </div>
 
       <div
-        className={`w-full flex flex-row items-center justify-end pr-3 ${
-          isHover ? "block" : "hidden"
-        }`}
+        className={"group w-full flex flex-row items-center justify-end pr-3"}
       >
         <PencilIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
+          className={
+            "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"
+          }
           onClick={(e) => {
             e.stopPropagation();
             const newValue = prompt("Please enter a new note title:", title);
@@ -38,7 +38,9 @@ const NoteListItem = ({ id, title, onClick }) => {
           }}
         />
         <TrashIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"}
+          className={
+            "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"
+          }
           onClick={(e) => {
             e.stopPropagation();
             deleteNote(id);
