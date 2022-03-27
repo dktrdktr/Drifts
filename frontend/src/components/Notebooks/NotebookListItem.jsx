@@ -1,9 +1,30 @@
 import { NewspaperIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
-import { useContext } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 
 const NotebookListItem = ({ id, book, onClick }) => {
   const { editNotebook, deleteNotebook } = useContext(StateContext);
+  const [editNameMode, setEditNameMode] = useState(false);
+  const [newName, setNewName] = useState("");
+  const nameInput = useRef(null);
+
+  useEffect(() => {
+    if (editNameMode === true) {
+      nameInput.current.focus();
+    }
+  }, [editNameMode]);
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    if (newName) {
+      editNotebook(id, newName);
+    }
+    setEditNameMode(false);
+  };
+
+  const handleInputCancel = () => {
+    setEditNameMode(false);
+  };
 
   return (
     <div
@@ -12,7 +33,22 @@ const NotebookListItem = ({ id, book, onClick }) => {
     >
       <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer">
         <NewspaperIcon className={"h-4 w-4 block mr-2"} />
-        <span className="whitespace-nowrap text-ellipsis">{book}</span>
+        {!editNameMode && (
+          <span className="whitespace-nowrap text-ellipsis">{book}</span>
+        )}
+        {editNameMode && (
+          <form onSubmit={handleNameSubmit}>
+            <input
+              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200"
+              type="text"
+              placeholder={book}
+              ref={nameInput}
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              onBlur={handleInputCancel}
+            />
+          </form>
+        )}
       </div>
 
       <div
@@ -24,10 +60,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
           }
           onClick={(e) => {
             e.stopPropagation();
-            const newValue = prompt("Please enter a new notebook name:", book);
-            if (newValue) {
-              editNotebook(id, newValue);
-            }
+            setEditNameMode(true);
           }}
         />
         <TrashIcon
