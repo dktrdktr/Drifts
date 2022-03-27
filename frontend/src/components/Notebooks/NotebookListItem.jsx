@@ -1,46 +1,82 @@
 import { NewspaperIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 
 const NotebookListItem = ({ id, book, onClick }) => {
-  const [isHover, setHover] = useState(false);
-  const { editNotebook, deleteNotebook } = useContext(StateContext);
+  const { currentNotebookId, editNotebook, deleteNotebook } =
+    useContext(StateContext);
+  const [editNameMode, setEditNameMode] = useState(false);
+  const [newName, setNewName] = useState("");
+  const nameInput = useRef(null);
+
+  useEffect(() => {
+    if (editNameMode === true) {
+      nameInput.current.focus();
+    }
+  }, [editNameMode]);
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    if (newName) {
+      editNotebook(id, newName);
+    }
+    setEditNameMode(false);
+  };
+
+  const handleInputCancel = () => {
+    setEditNameMode(false);
+  };
 
   return (
     <div
-      className="hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg"
+      className={`hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg cursor-pointer ${
+        id === currentNotebookId ? "bg-gray-200" : ""
+      } `}
       onClick={onClick}
-      onMouseOver={() => setHover(true)}
-      onMouseOut={() => setHover(false)}
     >
-      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer">
+      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg">
         <NewspaperIcon className={"h-4 w-4 block mr-2"} />
-        <span className="whitespace-nowrap text-ellipsis">{book}</span>
+        {!editNameMode && (
+          <span className="whitespace-nowrap text-ellipsis">{book}</span>
+        )}
+        {editNameMode && (
+          <form onSubmit={handleNameSubmit}>
+            <input
+              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200 outline-1 outline-black"
+              type="text"
+              placeholder={book}
+              ref={nameInput}
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              onBlur={handleInputCancel}
+            />
+          </form>
+        )}
       </div>
-
-      <div
-        className={`w-full flex flex-row items-center justify-end pr-3 ${
-          isHover ? "block" : "hidden"
-        }`}
-      >
-        <PencilIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"}
-          onClick={(e) => {
-            e.stopPropagation();
-            const newValue = prompt("Please enter a new notebook name:", book);
-            if (newValue) {
-              editNotebook(id, newValue);
+      {!editNameMode && (
+        <div
+          className={"group w-full flex flex-row items-center justify-end pr-3"}
+        >
+          <PencilIcon
+            className={
+              "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"
             }
-          }}
-        />
-        <TrashIcon
-          className={"p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"}
-          onClick={(e) => {
-            e.stopPropagation();
-            deleteNotebook(id);
-          }}
-        />
-      </div>
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditNameMode(true);
+            }}
+          />
+          <TrashIcon
+            className={
+              "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteNotebook(id);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
