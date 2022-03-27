@@ -3,7 +3,8 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext, useState, useRef, useEffect } from "react";
 
 const NotebookListItem = ({ id, book, onClick }) => {
-  const { editNotebook, deleteNotebook } = useContext(StateContext);
+  const { currentNotebookId, editNotebook, deleteNotebook } =
+    useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
   const [newName, setNewName] = useState("");
   const nameInput = useRef(null);
@@ -28,7 +29,9 @@ const NotebookListItem = ({ id, book, onClick }) => {
 
   return (
     <div
-      className="hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg"
+      className={`hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg ${
+        id === currentNotebookId ? "bg-gray-200" : ""
+      } `}
       onClick={onClick}
     >
       <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg cursor-pointer">
@@ -39,7 +42,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
             <input
-              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200"
+              className="rounded-md m-2 p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200 outline-1 outline-black"
               type="text"
               placeholder={book}
               ref={nameInput}
@@ -50,29 +53,30 @@ const NotebookListItem = ({ id, book, onClick }) => {
           </form>
         )}
       </div>
-
-      <div
-        className={"group w-full flex flex-row items-center justify-end pr-3"}
-      >
-        <PencilIcon
-          className={
-            "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"
-          }
-          onClick={(e) => {
-            e.stopPropagation();
-            setEditNameMode(true);
-          }}
-        />
-        <TrashIcon
-          className={
-            "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"
-          }
-          onClick={(e) => {
-            e.stopPropagation();
-            deleteNotebook(id);
-          }}
-        />
-      </div>
+      {!editNameMode && (
+        <div
+          className={"group w-full flex flex-row items-center justify-end pr-3"}
+        >
+          <PencilIcon
+            className={
+              "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-blue-200 rounded-lg"
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+              setEditNameMode(true);
+            }}
+          />
+          <TrashIcon
+            className={
+              "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"
+            }
+            onClick={(e) => {
+              e.stopPropagation();
+              deleteNotebook(id);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
