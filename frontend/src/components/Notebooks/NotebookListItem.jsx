@@ -42,7 +42,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
             <input
-              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200 outline-1 outline-black"
+              className="rounded-md p-1 whitespace-nowrap w-4/5 text-ellipsis hover:bg-gray-200 outline-1 outline-black"
               type="text"
               placeholder={book}
               ref={nameInput}
