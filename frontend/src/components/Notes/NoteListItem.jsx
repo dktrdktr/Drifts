@@ -9,7 +9,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 const NoteListItem = ({ id, title, onClick }) => {
   const { currentNote, editNote, deleteNote } = useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState(title);
   const nameInput = useRef(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const NoteListItem = ({ id, title, onClick }) => {
   };
 
   const handleInputCancel = () => {
+    setNewName(title);
     setEditNameMode(false);
   };
 
@@ -45,12 +46,12 @@ const NoteListItem = ({ id, title, onClick }) => {
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
             <input
-              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200 outline-1 outline-black"
+              className="rounded-md p-1 whitespace-nowrap w-4/5 text-ellipsis bg-white outline-1 outline-black"
               type="text"
-              placeholder={title}
               ref={nameInput}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               onBlur={handleInputCancel}
             />
           </form>

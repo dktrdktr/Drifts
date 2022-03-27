@@ -6,7 +6,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
   const { currentNotebookId, editNotebook, deleteNotebook } =
     useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState(book);
   const nameInput = useRef(null);
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
   };
 
   const handleInputCancel = () => {
+    setNewName(book);
     setEditNameMode(false);
   };
 
@@ -42,12 +43,12 @@ const NotebookListItem = ({ id, book, onClick }) => {
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
             <input
-              className="rounded-md p-1 whitespace-nowrap text-ellipsis hover:bg-gray-200 outline-1 outline-black"
+              className="rounded-md p-1 whitespace-nowrap w-4/5 text-ellipsis bg-white outline-1 outline-black"
               type="text"
-              placeholder={book}
               ref={nameInput}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
               onBlur={handleInputCancel}
             />
           </form>
