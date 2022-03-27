@@ -6,7 +6,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
   const { currentNotebookId, editNotebook, deleteNotebook } =
     useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState(book);
   const nameInput = useRef(null);
 
   useEffect(() => {
@@ -19,12 +19,12 @@ const NotebookListItem = ({ id, book, onClick }) => {
     e.preventDefault();
     if (newName) {
       editNotebook(id, newName);
-      setNewName("");
     }
     setEditNameMode(false);
   };
 
   const handleInputCancel = () => {
+    setNewName(book);
     setEditNameMode(false);
   };
 
@@ -45,7 +45,6 @@ const NotebookListItem = ({ id, book, onClick }) => {
             <input
               className="rounded-md p-1 whitespace-nowrap w-4/5 text-ellipsis bg-white outline-1 outline-black"
               type="text"
-              placeholder={book}
               ref={nameInput}
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
