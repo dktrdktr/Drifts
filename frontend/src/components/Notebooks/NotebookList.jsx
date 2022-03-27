@@ -8,12 +8,8 @@ import { useContext } from "react";
 const NotebookList = () => {
   const { notebooks, userId, setState, addNotebook } = useContext(StateContext);
 
-  const renderNotebooks = (userId) => {
-    const filteredNotebooks = notebooks.filter(
-      (item) => item.user_id === userId
-    );
-
-    return filteredNotebooks.map((item) => {
+  const renderNotebooks = () => {
+    return notebooks.map((item) => {
       return (
         <NotebookListItem
           key={item.id}
@@ -35,9 +31,8 @@ const NotebookList = () => {
   return (
     <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
-      {notebooks && renderNotebooks(userId)}
+      {notebooks && renderNotebooks()}
       {notebooks && <AddButton onClick={() => addNotebook(userId)} />}
-      {/* set AddNotebook argument userId = 1 for testing */}
     </div>
   );
 };
