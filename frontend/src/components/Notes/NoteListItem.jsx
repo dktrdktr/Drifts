@@ -27,7 +27,7 @@ const NoteListItem = ({ id, title, onClick }) => {
   };
 
   const handleInputCancel = () => {
-    setNewName(title);
+    editNote(id, newName);
     setEditNameMode(false);
   };
 
