@@ -18,6 +18,22 @@ const VIEW = "VIEW";
 const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
   const { saveNote, logOut, currentNote, text } = useContext(StateContext);
   const [editorMode, setEditorMode] = useState(EDIT);
+  const [saveFeedback, setSaveFeedback] = useState("hidden");
+
+  const handleSave = async () => {
+    const response = await saveNote(currentNote.id, text);
+    if (response) {
+      setSaveFeedback("success");
+      setTimeout(() => {
+        setSaveFeedback("hidden");
+      }, 1000);
+      return;
+    }
+    setSaveFeedback("error");
+    setTimeout(() => {
+      setSaveFeedback("hidden");
+    }, 1000);
+  };
 
   return (
     <>
@@ -31,11 +47,25 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
           </div>
         )}
         {!viewMode && <div />}
-        <div className="flex flex-row gap-x-2">
-          <SaveIcon
-            className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
-            onClick={() => saveNote(currentNote.id, text)}
-          />
+        <div className="flex flex-row gap-x-2 items-center">
+          <span
+            className={`${
+              saveFeedback === "success"
+                ? "block animate-bounce text-[rgb(34,139,34)]"
+                : saveFeedback === "error"
+                ? "block animate-bounce text-[#FF0000]"
+                : "hidden"
+            } 
+            `}
+          >
+            {saveFeedback === "success" ? "Saved" : "Error"}
+          </span>
+          <div className="h-8 w-8">
+            <SaveIcon
+              className={"cursor-pointer hover:text-blue-500"}
+              onClick={handleSave}
+            />
+          </div>
           {editorMode !== SPLIT && (
             <EyeIcon
               className={

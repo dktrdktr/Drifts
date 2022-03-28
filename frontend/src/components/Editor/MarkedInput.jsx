@@ -18,7 +18,7 @@ const MarkedInput = () => {
         <textarea
           name=""
           id=""
-          className="h-full w-full bg-white"
+          className="h-full w-full bg-white focus:outline-none"
           onChange={onInputChange}
           value={text}
         ></textarea>

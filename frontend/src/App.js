@@ -67,7 +67,7 @@ function App() {
           <>
             <div className="flex flex-row w-2/5 p-2 space-x-4">
               <NotebookList />
-              <NoteList handleNoteClick={handleNoteClick} />
+              <NoteList />
             </div>
             <div className="w-3/5 h-full py-6">
               <Editor setUserAuth={setUserAuth} />
