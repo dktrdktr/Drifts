@@ -6,8 +6,15 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NoteList = ({ handleNoteClick }) => {
-  const { notebooks, currentNotebookId, setState, addNote } =
-    useContext(StateContext);
+  const {
+    notebooks,
+    currentNotebookId,
+    currentNote,
+    text,
+    addNote,
+    saveNote,
+    setState,
+  } = useContext(StateContext);
 
   let renderNotes = null;
 
@@ -24,6 +31,7 @@ const NoteList = ({ handleNoteClick }) => {
             id={item.id}
             title={item.title}
             onClick={() => {
+              saveNote(currentNote.id, text);
               setState((prev) => ({
                 ...prev,
                 text: item.content,

@@ -67,9 +67,9 @@ export default function useApplicationData() {
         params: { id: currentNoteId, content: text },
       });
       refreshData(state.userId);
-      return res.data;
+      return true;
     } catch (error) {
-      return error.response;
+      return false;
     }
   };
 
