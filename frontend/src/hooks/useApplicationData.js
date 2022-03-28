@@ -61,7 +61,7 @@ export default function useApplicationData() {
 
   const saveNote = async (currentNoteId, text) => {
     try {
-      const res = await axios({
+      await axios({
         url: "/notes/" + currentNoteId,
         method: "put",
         params: { id: currentNoteId, content: text },
