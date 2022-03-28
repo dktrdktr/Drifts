@@ -1,6 +1,5 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
-import Tooltip from "../Tooltip";
 import { useState } from "react";
 import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
@@ -47,26 +46,31 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
             />
           </div>
         )}
-        {!viewMode && <div />}
-        <div className="flex flex-row gap-x-2 items-center">
-          <span
-            className={`${
-              saveFeedback === "success"
-                ? "block animate-bounce text-[rgb(34,139,34)]"
-                : saveFeedback === "error"
-                ? "block animate-bounce text-[#FF0000]"
-                : "hidden"
-            } 
-            `}
-          >
-            {saveFeedback === "success" ? "Saved" : "Error"}
-          </span>
+        {!viewMode && (
+          <div className="flex flex-row space-x-4 invisible">
+            <ChevronLeftIcon
+              className="h-8 w-8 cursor-pointer hover:text-blue-500"
+              onClick={() => handleEditorBackClick()}
+            />
+          </div>
+        )}
+        <div className="flex flex-row gap-x-4 items-center">
           <div className="relative flex flex-col items-center group">
             <SaveIcon
               className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
               onClick={handleSave}
             />
-            <Tooltip description={"Save"} />
+            <p
+              className={`text-xs select-none ${
+                saveFeedback === "success"
+                  ? "block animate-bounce text-[rgb(34,139,34)]"
+                  : saveFeedback === "error"
+                  ? "block animate-bounce text-[#FF0000]"
+                  : ""
+              }`}
+            >
+              {saveFeedback === "success" ? "Saved" : "Save"}
+            </p>
           </div>
           {editorMode !== SPLIT && (
             <div className="relative flex flex-col items-center group">
@@ -82,7 +86,7 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
                     : setEditorMode(EDIT)
                 }
               />
-              <Tooltip description={"View"} />
+              <p className="text-xs select-none">View</p>
             </div>
           )}
           <div className="relative flex flex-col items-center group">
@@ -98,7 +102,19 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
                   : setEditorMode(EDIT)
               }
             />
-            <Tooltip description={"Split"} />
+            <p className="text-xs select-none">Split</p>
+          </div>
+        </div>
+        <div>
+          <div className="relative flex flex-col items-center group">
+            <LogoutIcon
+              className="h-8 w-8 cursor-pointer hover:text-red-500"
+              onClick={() => {
+                setUserAuth(false);
+                logOut();
+              }}
+            />
+            <p className="text-xs select-none">Logout</p>
           </div>
         </div>
       </div>
@@ -122,16 +138,6 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
       </section>
       <div className="flex justify-between">
         <br />
-        <div className="relative flex flex-col items-center group">
-          <LogoutIcon
-            className="h-8 w-8 cursor-pointer hover:text-red-500"
-            onClick={() => {
-              setUserAuth(false);
-              logOut();
-            }}
-          />
-          <Tooltip description={"Logout"} translate={"translate-y-14"} />
-        </div>
       </div>
     </>
   );

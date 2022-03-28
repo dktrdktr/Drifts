@@ -69,7 +69,7 @@ function App() {
               <NotebookList />
               <NoteList />
             </div>
-            <div className="w-3/5 h-full py-6">
+            <div className="w-3/5 h-full py-6 px-2">
               <Editor setUserAuth={setUserAuth} />
             </div>
           </>
