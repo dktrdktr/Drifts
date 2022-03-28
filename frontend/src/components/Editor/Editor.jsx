@@ -37,9 +37,9 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
 
   return (
     <>
-      <div className="w-full h-1/12 flex justify-between">
+      <div className="w-full h-1/12 flex justify-between gap-x-4">
         {viewMode && viewMode === "EDITOR" && (
-          <div className="flex flex-row space-x-4">
+          <div className="flex flex-row">
             <ChevronLeftIcon
               className="h-8 w-8 cursor-pointer hover:text-blue-500"
               onClick={() => handleEditorBackClick()}
@@ -54,26 +54,24 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
             />
           </div>
         )}
-        <div className="flex flex-row gap-x-4 items-center">
-          <div className="relative flex flex-col items-center group">
-            <SaveIcon
-              className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
-              onClick={handleSave}
+        <div className="flex justify-between gap-x-4 w-36">
+          <div className="relative flex flex-col items-center group w-8">
+            <CashIcon
+              className={
+                editorMode === SPLIT
+                  ? "h-8 w-8 cursor-pointer text-blue-500"
+                  : "h-8 w-8 cursor-pointer hover:text-blue-500"
+              }
+              onClick={() =>
+                editorMode !== SPLIT
+                  ? setEditorMode(SPLIT)
+                  : setEditorMode(EDIT)
+              }
             />
-            <p
-              className={`text-xs select-none ${
-                saveFeedback === "success"
-                  ? "block animate-bounce text-[rgb(34,139,34)]"
-                  : saveFeedback === "error"
-                  ? "block animate-bounce text-[#FF0000]"
-                  : ""
-              }`}
-            >
-              {saveFeedback === "success" ? "Saved" : "Save"}
-            </p>
+            <p className="text-xs select-none">Split</p>
           </div>
           {editorMode !== SPLIT && (
-            <div className="relative flex flex-col items-center group">
+            <div className="relative flex flex-col items-center group w-8">
               <EyeIcon
                 className={
                   editorMode === VIEW
@@ -89,20 +87,22 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
               <p className="text-xs select-none">View</p>
             </div>
           )}
-          <div className="relative flex flex-col items-center group">
-            <CashIcon
-              className={
-                editorMode === SPLIT
-                  ? "h-8 w-8 cursor-pointer text-blue-500"
-                  : "h-8 w-8 cursor-pointer hover:text-blue-500"
-              }
-              onClick={() =>
-                editorMode !== SPLIT
-                  ? setEditorMode(SPLIT)
-                  : setEditorMode(EDIT)
-              }
+          <div className="relative flex flex-col items-center group w-8">
+            <SaveIcon
+              className={"h-8 w-8 cursor-pointer hover:text-blue-500"}
+              onClick={handleSave}
             />
-            <p className="text-xs select-none">Split</p>
+            <p
+              className={`text-xs select-none ${
+                saveFeedback === "success"
+                  ? "block animate-bounce text-[rgb(34,139,34)]"
+                  : saveFeedback === "error"
+                  ? "block animate-bounce text-[#FF0000]"
+                  : ""
+              }`}
+            >
+              {saveFeedback === "success" ? "Saved" : "Save"}
+            </p>
           </div>
         </div>
         <div>
