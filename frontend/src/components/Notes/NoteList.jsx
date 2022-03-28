@@ -37,7 +37,9 @@ const NoteList = ({ handleNoteClick }) => {
                 text: item.content,
                 currentNote: item,
               }));
-              handleNoteClick();
+              if (handleNoteClick) {
+                handleNoteClick();
+              }
             }}
           />
         );
