@@ -24,7 +24,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
   };
 
   const handleInputCancel = () => {
-    setNewName(book);
+    editNotebook(id, newName);
     setEditNameMode(false);
   };
 
