@@ -4,6 +4,7 @@ require("dotenv").config();
 // Web server config
 const PORT = process.env.PORT || 3001;
 const express = require("express");
+const cors = require("cors");
 // const socketio = require("socket.io");
 // const http = require("http");
 const app = express();
@@ -26,6 +27,7 @@ db.connect();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(cors());
 
 const indexRouter = require("./routes/index");
 const usersRoutes = require("./routes/users");
