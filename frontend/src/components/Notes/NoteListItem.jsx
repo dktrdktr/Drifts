@@ -33,20 +33,18 @@ const NoteListItem = ({ id, title, onClick }) => {
 
   return (
     <div
-      className={`hover:shadow-sm flex flex-row w-full hover:bg-gray-200 rounded-lg cursor-pointer ${
+      className={`hover:shadow-sm flex flex-row overflow-clip hover:bg-gray-200 rounded-lg cursor-pointer ${
         currentNote.id === id ? "bg-gray-200" : ""
       }`}
       onClick={onClick}
     >
-      <div className="w-full flex flex-row items-center text-sm pl-3 h-12 rounded-lg">
+      <div className="flex flex-row w-4/6 items-center text-sm pl-3 h-12 rounded-lg">
         <DocumentTextIcon className={"h-4 w-4 block mr-2"} />
-        {!editNameMode && (
-          <span className="whitespace-nowrap text-ellipsis">{title}</span>
-        )}
+        {!editNameMode && <span className="truncate">{title}</span>}
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
             <input
-              className="rounded-md p-1 whitespace-nowrap w-4/5 text-ellipsis bg-white outline-1 outline-black"
+              className="rounded-md p-1 w-full bg-white outline-1 outline-black"
               type="text"
               ref={nameInput}
               value={newName}
