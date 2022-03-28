@@ -47,15 +47,15 @@ function App() {
   }
   return (
     <StateProvider>
-      <div className="h-full flex flex-row justify-center py-6 md:w-full md:px-6 bg-gradient-to-r from-zinc-100 to-zinc-300">
+      <div className="h-full flex flex-row justify-center py-6 w-full bg-gradient-to-r from-zinc-100 to-zinc-300">
         {viewMode === MENU && width < XL_BREAKPOINT && (
-          <div className="flex flex-row w-full sm:w-9/12 p-2 space-x-2">
+          <div className="flex flex-row w-full md:max-w-3xl p-2 space-x-2">
             <NotebookList />
             <NoteList handleNoteClick={handleNoteClick} />
           </div>
         )}
         {viewMode === EDITOR && width < XL_BREAKPOINT && (
-          <div className=" w-full md:w-8/12 h-full p-4">
+          <div className=" w-full h-full p-4">
             <Editor
               viewMode={viewMode}
               handleEditorBackClick={handleEditorBackClick}

@@ -39,7 +39,7 @@ const NoteListItem = ({ id, title, onClick }) => {
       onClick={onClick}
     >
       <div className="flex flex-row w-4/6 items-center text-sm pl-3 h-12 rounded-lg">
-        <DocumentTextIcon className={"h-4 w-4 block mr-2"} />
+        <DocumentTextIcon className={"h-4 w-4 block mr-2 shrink-0"} />
         {!editNameMode && <span className="truncate">{title}</span>}
         {editNameMode && (
           <form onSubmit={handleNameSubmit}>
