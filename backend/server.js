@@ -29,13 +29,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cors());
 
-const indexRouter = require("./routes/index");
+// const indexRouter = require("./routes/index");
 const usersRoutes = require("./routes/users");
 const notebooksRoutes = require("./routes/notebooks");
 const notesRoutes = require("./routes/notes");
 const loginRoutes = require("./routes/login");
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
 app.use("/users", usersRoutes(db));
 app.use("/notebooks", notebooksRoutes(db));
 app.use("/notes", notesRoutes(db));
