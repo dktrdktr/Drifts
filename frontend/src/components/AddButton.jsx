@@ -3,7 +3,7 @@ import { PlusCircleIcon } from "@heroicons/react/outline";
 const AddButton = ({ onClick }) => {
   return (
     <div
-      className="flex flex-row w-full justify-items-center"
+      className="flex flex-row w-full justify-items-center cursor-pointer"
       onClick={onClick}
     >
       <PlusCircleIcon
