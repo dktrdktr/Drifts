@@ -1,7 +1,7 @@
 import { NewspaperIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
 import { useContext, useState, useRef, useEffect } from "react";
-import DeletePrompt from "../DeletePrompt";
+import UserPrompt from "../UserPrompt";
 
 const NotebookListItem = ({ id, book, onClick }) => {
   const { currentNotebookId, editNotebook, deleteNotebook } =
@@ -25,7 +25,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
     setEditNameMode(false);
   };
 
-  const handleInputCancel = () => {
+  const onInputCancel = () => {
     editNotebook(id, newName);
     setEditNameMode(false);
   };
@@ -55,7 +55,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 onClick={(e) => e.stopPropagation()}
-                onBlur={handleInputCancel}
+                onBlur={onInputCancel}
               />
             </form>
           )}
@@ -79,10 +79,13 @@ const NotebookListItem = ({ id, book, onClick }) => {
               className={
                 "hidden group-hover:block p-1 w-6 h-6 text-black hover:bg-red-200 rounded-lg"
               }
-              onClick={() => setShowDeletePrompt(true)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDeletePrompt(true);
+              }}
             />
             {showDeletePrompt && (
-              <DeletePrompt
+              <UserPrompt
                 promptType="notebook"
                 onDelete={onDelete}
                 onDeleteCancel={() => setShowDeletePrompt(false)}

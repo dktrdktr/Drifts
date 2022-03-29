@@ -2,8 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 export default function UserPrompt({ promptType, onDelete, onDeleteCancel }) {
-  const userResponse = (e, response) => {
-    e.stopPropagation();
+  const userResponse = (response) => {
     if (response) {
       onDelete();
       return;
@@ -58,14 +57,14 @@ export default function UserPrompt({ promptType, onDelete, onDeleteCancel }) {
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={(e) => userResponse(e, true)}
+                    onClick={() => userResponse(true)}
                   >
                     Yes
                   </button>
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={(e) => userResponse(e, false)}
+                    onClick={() => userResponse(false)}
                   >
                     No
                   </button>
