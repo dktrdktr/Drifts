@@ -19,6 +19,7 @@ const AddButton = ({ onAddNew }) => {
   const handleNameSubmit = () => {
     onAddNew(name);
     setNameMode(false);
+    setName("");
   };
 
   if (!nameMode) {
