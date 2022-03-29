@@ -4,7 +4,16 @@ MarkThatDown
 MarkThatDown is a simple notebook SPA that allows users to create, maintain and manage their notes in markdown.\
 Built with React, Node, Express, Postgres, and Tailwind CSS.
 
+https://markthatdown.netlify.app/ \
+(Please use `TseClifford@gmail.com` as login email for demo, password authentication is disabled)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/92537b8d-d0c6-4052-8a44-bf68427f0f86/deploy-status)](https://app.netlify.com/sites/markthatdown/deploys)
+
+## Team
+[<img src='https://img.shields.io/badge/Github-TseClifford-blue?style=flat-square&logo=github'>](https://github.com/TseClifford)
+[<img src='https://img.shields.io/badge/Github-dktrdktr-blue?style=flat-square&logo=github'>](https://github.com/dktrdktr)[<img src='https://img.shields.io/badge/Github-alparslanustaa-blue?style=flat-square&logo=github'>](https://github.com/alparslanustaa)
+
+## Features
 
 * Users are able to:
     * Create new notebooks and notes
