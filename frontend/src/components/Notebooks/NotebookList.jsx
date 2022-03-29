@@ -36,7 +36,7 @@ const NotebookList = () => {
     <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks()}
-      {notebooks && <AddButton onAddNew={onAddNew} />}
+      {notebooks && <AddButton onAddNew={onAddNew} listType={"notebooks"} />}
     </div>
   );
 };
