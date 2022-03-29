@@ -73,12 +73,12 @@ export default function useApplicationData() {
     }
   };
 
-  const addNote = async (userId) => {
+  const addNote = async (userId, name) => {
     try {
       const res = await axios({
         url: "/notes",
         method: "post",
-        params: { id: userId },
+        params: { id: userId, title: name },
       });
       refreshData(state.userId);
       return res.data;
@@ -115,12 +115,12 @@ export default function useApplicationData() {
     }
   };
 
-  const addNotebook = async (userId) => {
+  const addNotebook = async (userId, name) => {
     try {
       const res = await axios({
         url: "/notebooks",
         method: "post",
-        params: { id: userId },
+        params: { id: userId, name },
       });
       refreshData(state.userId);
       return res.data;
