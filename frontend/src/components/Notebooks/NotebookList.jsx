@@ -28,11 +28,15 @@ const NotebookList = () => {
     });
   };
 
+  const onAddNew = (name) => {
+    addNotebook(userId, name);
+  };
+
   return (
     <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notebooks"} Icon={CollectionIcon} />
       {notebooks && renderNotebooks()}
-      {notebooks && <AddButton onClick={() => addNotebook(userId)} />}
+      {notebooks && <AddButton onAddNew={onAddNew} />}
     </div>
   );
 };
