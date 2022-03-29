@@ -46,12 +46,16 @@ const NoteList = ({ handleNoteClick }) => {
       });
   }
 
+  const onAddNew = (name) => {
+    addNote(currentNotebookId, name);
+  };
+
   return (
     <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
       {currentNotebookId && (
-        <AddButton onClick={() => addNote(currentNotebookId)} />
+        <AddButton onAddNew={onAddNew} listType={"notes"} />
       )}
     </div>
   );

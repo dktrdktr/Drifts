@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-axios.defaults.baseURL = "http://localhost:3000/";
-
 export default function useApplicationData() {
   const [state, setState] = useState({
     text: "",
@@ -73,12 +71,12 @@ export default function useApplicationData() {
     }
   };
 
-  const addNote = async (userId) => {
+  const addNote = async (userId, name) => {
     try {
       const res = await axios({
         url: "/notes",
         method: "post",
-        params: { id: userId },
+        params: { id: userId, title: name },
       });
       refreshData(state.userId);
       return res.data;
@@ -115,12 +113,12 @@ export default function useApplicationData() {
     }
   };
 
-  const addNotebook = async (userId) => {
+  const addNotebook = async (userId, name) => {
     try {
       const res = await axios({
         url: "/notebooks",
         method: "post",
-        params: { id: userId },
+        params: { id: userId, name },
       });
       refreshData(state.userId);
       return res.data;

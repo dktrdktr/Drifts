@@ -40,9 +40,10 @@ module.exports = (db) => {
 
     // Add new notebook
     .post("/", (request, response) => {
-      db.query(`INSERT INTO notebooks (user_id) VALUES ($1::integer)`, [
-        request.query.id,
-      ]).then(() => {
+      db.query(
+        `INSERT INTO notebooks (user_id, book) VALUES ($1::integer, $2)`,
+        [request.query.id, request.query.name]
+      ).then(() => {
         response.status(204).json({});
       });
     })
