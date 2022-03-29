@@ -40,7 +40,7 @@ export default function UserPrompt({ promptType, onDelete, onDeleteCancel }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white drop-shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
@@ -56,14 +56,14 @@ export default function UserPrompt({ promptType, onDelete, onDeleteCancel }) {
                 <div className="flex gap-x-2 mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="inline-flex justify-center w-1/4 px-4 py-2 text-sm font-medium bg-gray-200 border border-transparent rounded-md hover:bg-blue-200"
                     onClick={() => userResponse(true)}
                   >
                     Yes
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="inline-flex justify-center w-1/4 px-4 py-2 text-sm font-medium bg-gray-200 border border-transparent rounded-md hover:bg-red-200"
                     onClick={() => userResponse(false)}
                   >
                     No
