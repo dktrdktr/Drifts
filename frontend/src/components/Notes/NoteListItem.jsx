@@ -5,12 +5,14 @@ import {
 } from "@heroicons/react/outline";
 import { StateContext } from "../../providers/StateProvider";
 import { useContext, useState, useRef, useEffect } from "react";
+import UserPrompt from "../UserPrompt";
 
 const NoteListItem = ({ id, title, onClick }) => {
   const { currentNote, editNote, deleteNote } = useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
   const [newName, setNewName] = useState(title);
   const nameInput = useRef(null);
+  const [showDeletePrompt, setShowDeletePrompt] = useState(false);
 
   useEffect(() => {
     if (editNameMode === true) {
@@ -26,9 +28,14 @@ const NoteListItem = ({ id, title, onClick }) => {
     setEditNameMode(false);
   };
 
-  const handleInputCancel = () => {
+  const onInputCancel = () => {
     editNote(id, newName);
     setEditNameMode(false);
+  };
+
+  const onDelete = () => {
+    deleteNote(id);
+    setShowDeletePrompt(false);
   };
 
   return (
@@ -50,7 +57,7 @@ const NoteListItem = ({ id, title, onClick }) => {
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              onBlur={handleInputCancel}
+              onBlur={onInputCancel}
             />
           </form>
         )}
@@ -74,9 +81,16 @@ const NoteListItem = ({ id, title, onClick }) => {
             }
             onClick={(e) => {
               e.stopPropagation();
-              deleteNote(id);
+              setShowDeletePrompt(true);
             }}
           />
+          {showDeletePrompt && (
+            <UserPrompt
+              promptType="note"
+              onDelete={onDelete}
+              onDeleteCancel={() => setShowDeletePrompt(false)}
+            />
+          )}
         </div>
       )}
     </div>
