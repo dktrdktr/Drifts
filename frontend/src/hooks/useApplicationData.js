@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 
-axios.defaults.baseURL = "http://localhost:3000/";
-
 export default function useApplicationData() {
   const [state, setState] = useState({
     text: "",
