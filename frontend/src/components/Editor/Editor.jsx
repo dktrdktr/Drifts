@@ -37,7 +37,7 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
 
   return (
     <>
-      <div className="w-full h-1/12 flex justify-between gap-x-4">
+      <div className="flex w-full h-1/12 justify-between gap-x-4">
         {viewMode && viewMode === "EDITOR" && (
           <div className="flex flex-row">
             <ChevronLeftIcon
@@ -136,9 +136,6 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
           </>
         )}
       </section>
-      <div className="flex justify-between">
-        <br />
-      </div>
     </>
   );
 };
