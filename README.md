@@ -3,7 +3,7 @@ Drifts
 
 Drifts is a note-taking app for organizing and taking notes in the markdown format. 
 
-This is a learning project to practise and showcase PERN stack skills. 
+This is a learning project for the purposes of practising and showcasing PERN stack skills. First built as a graduation project at the Lighthouse Labs bootcamp, together with [Clifford Tse](https://github.com/TseClifford) and [Alparslan Bahadir Usta](https://github.com/alparslanustaa). Since April 2022, I've forked the project and have been developing it individually.
 
 ## Features
 
@@ -29,14 +29,6 @@ https://markthatdown.netlify.app/ \
 !["Desktop"](./frontend/public/screenshots/desktop-demo.gif)
 ### Mobile
 !["Mobile"](./frontend/public/screenshots/mobile-demo.gif)
-
-
-## Team
-First version (called MarkThatDown) was built as a graduation project at Lighthouse Labs bootcamp, together with 
-[<img src='https://img.shields.io/badge/Github-TseClifford-blue?style=flat-square&logo=github'>](https://github.com/TseClifford)
-[<img src='https://img.shields.io/badge/Github-alparslanustaa-blue?style=flat-square&logo=github'>](https://github.com/alparslanustaa)
-
-On April 1st 2022 the project was forked to continue developing it individually.
 
 ## Setup
 
