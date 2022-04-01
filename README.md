@@ -1,37 +1,42 @@
-MarkThatDown
+Drifts
 =========
 
-MarkThatDown is a simple notebook SPA that allows users to create, maintain and manage their notes in markdown.\
-Built with React, Node, Express, Postgres, and Tailwind CSS.
+Drifts is a note-taking app for organizing and taking notes in the markdown format. 
 
+This is a learning project to practise and showcase PERN stack skills. 
+
+## Features
+
+Current highlighted features:
+- Live markdown preview mode (with beautiful typography) right in the browser. 
+- Minimal responsive design with accessibility features
+- CRUD operations for notebooks and notes
+
+Features in development:
+- Sorting operations and search functionality for notes
+- Web socket connection to auto-save notes as you write (à la Google Docs)
+- Share-able links for each note with custom permissions control
+
+## Live Preview
 https://markthatdown.netlify.app/ \
-(Please use `TseClifford@gmail.com` as login email for demo, password authentication is disabled)
+(Please use `dotubutis@gmail.com` as login email for demo, password authentication is disabled)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/92537b8d-d0c6-4052-8a44-bf68427f0f86/deploy-status)](https://app.netlify.com/sites/markthatdown/deploys)
 
-## Team
-[<img src='https://img.shields.io/badge/Github-TseClifford-blue?style=flat-square&logo=github'>](https://github.com/TseClifford)
-[<img src='https://img.shields.io/badge/Github-dktrdktr-blue?style=flat-square&logo=github'>](https://github.com/dktrdktr)[<img src='https://img.shields.io/badge/Github-alparslanustaa-blue?style=flat-square&logo=github'>](https://github.com/alparslanustaa)
-
-## Final Product
+## Screenshots
 
 ### Desktop
 !["Desktop"](./frontend/public/screenshots/desktop-demo.gif)
 ### Mobile
 !["Mobile"](./frontend/public/screenshots/mobile-demo.gif)
 
-## Features
 
-* Users are able to:
-    * Create new notebooks and notes
-    * Edit notebook and note names
-    * Delete notebook and notes.
-    * Update and save note contents
+## Team
+First version (called MarkThatDown) was built as a graduation project at Lighthouse Labs bootcamp, together with 
+[<img src='https://img.shields.io/badge/Github-TseClifford-blue?style=flat-square&logo=github'>](https://github.com/TseClifford)
+[<img src='https://img.shields.io/badge/Github-alparslanustaa-blue?style=flat-square&logo=github'>](https://github.com/alparslanustaa)
 
-* Interface:
-  * Optimized for mobile view-port, a single section is rendered with the ability to toggle between notebooks/note lists and editor
-  * Editor component view can toggle between editor, preview or split mode
-  * Notes are saved automatically when selecting a different note within the same notebook
+On April 1st 2022 the project was forked to continue developing it individually.
 
 ## Setup
 
