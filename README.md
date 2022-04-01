@@ -15,9 +15,9 @@ https://markthatdown.netlify.app/ \
 
 ## Final Product
 
-# Desktop
+### Desktop
 !["Desktop"](./frontend/public/screenshots/desktop-demo.gif)
-# Mobile
+### Mobile
 !["Mobile"](./frontend/public/screenshots/mobile-demo.gif)
 
 ## Features
