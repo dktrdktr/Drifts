@@ -13,6 +13,13 @@ https://markthatdown.netlify.app/ \
 [<img src='https://img.shields.io/badge/Github-TseClifford-blue?style=flat-square&logo=github'>](https://github.com/TseClifford)
 [<img src='https://img.shields.io/badge/Github-dktrdktr-blue?style=flat-square&logo=github'>](https://github.com/dktrdktr)[<img src='https://img.shields.io/badge/Github-alparslanustaa-blue?style=flat-square&logo=github'>](https://github.com/alparslanustaa)
 
+## Final Product
+
+# Desktop
+!["Desktop"](./frontend/public/screenshots/desktop-demo.gif)
+# Mobile
+!["Mobile"](./frontend/public/screenshots/mobile-demo.gif)
+
 ## Features
 
 * Users are able to:
