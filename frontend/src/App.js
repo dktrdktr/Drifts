@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Cookies from "js-cookie";
-// import { io } from "socket.io-client";
 
 import NotebookList from "./components/Notebooks/NotebookList";
 import NoteList from "./components/Notes/NoteList";
@@ -9,8 +8,6 @@ import LoginForm from "./components/LoginForm";
 import { useState } from "react";
 import useWindowWidth from "./hooks/useWindowWidth";
 import StateProvider from "./providers/StateProvider";
-
-// const ENDPOINT = "http://localhost:3000";
 
 const MENU = "MENU";
 const EDITOR = "EDITOR";
@@ -21,11 +18,6 @@ function App() {
   const [userAuth, setUserAuth] = useState(false);
 
   const { width } = useWindowWidth();
-
-  // useEffect(() => {
-  //   const socket = io(ENDPOINT);
-  //   socket.on("connect", () => console.log(socket.id));
-  // }, []);
 
   useEffect(() => {
     const user = Cookies.get("id") ? true : false;
