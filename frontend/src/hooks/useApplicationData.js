@@ -3,171 +3,183 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 export default function useApplicationData() {
-  const [state, setState] = useState({
-    text: "",
-    isLoading: true,
-    currentNotebookId: null,
-    currentNote: {},
-  });
+  const [notebooks, setNotebooks] = useState([]);
+  const [selectedNotebookId, setSelectedNotebookId] = useState(null);
+  const [selectedNote, setSelectedNote] = useState({ id: null });
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    initialLoad();
-  }, []);
+    const userIdFromCookie = Number(Cookies.get("id"));
+    if (userIdFromCookie) {
+      setUserId(userIdFromCookie);
+    }
 
-  const initialLoad = async () => {
-    try {
-      const userId = Number(Cookies.get("id"));
-      setState((prev) => ({
-        ...prev,
-        isLoading: false,
-        userId: userId,
-      }));
-      if (userId && userId > 0) {
-        const NotebookData = await axios({
-          url: "/notebooks",
-          method: "get",
-          params: { userId: userId },
-        });
-
-        setState((prev) => ({
-          ...prev,
-          notebooks: NotebookData.data.notebooks,
-        }));
+    const fetchNotebookData = async () => {
+      try {
+        if (userId) {
+          const response = await axios({
+            url: "/notebooks",
+            method: "get",
+            params: { userId: userId },
+          });
+          if (response) {
+            const notebooksData = response.data.notebooks;
+            setNotebooks(notebooksData);
+          }
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    };
 
-  const refreshData = async (userId) => {
+    fetchNotebookData();
+  }, [userId]);
+
+  const fetchNote = async (noteId) => {
     try {
-      const NotebookData = await axios({
-        url: "/notebooks",
+      const response = await axios({
+        url: "/notes",
         method: "get",
-        params: { userId: userId },
+        params: { id: noteId },
       });
-
-      setState((prev) => ({
-        ...prev,
-        isLoading: false,
-        notebooks: NotebookData.data.notebooks,
-      }));
+      if (response && response.data.notes[0].length !== 0) {
+        setSelectedNote(response.data.notes[0]);
+      }
+      return true;
     } catch (err) {
       console.log(err);
-    }
-  };
-
-  const saveNote = async (currentNoteId, text) => {
-    try {
-      await axios({
-        url: "/notes/" + currentNoteId,
-        method: "put",
-        params: { id: currentNoteId, content: text },
-      });
-      refreshData(state.userId);
-      return true;
-    } catch (error) {
       return false;
     }
   };
 
+  const saveNote = async (noteId, editorText) => {
+    console.log("saveNote");
+    // try {
+    //   const response = await axios({
+    //     url: "/notes/" + noteId,
+    //     method: "put",
+    //     params: { id: noteId, content: editorText },
+    //   });
+    //   if (response.status >= 200 && response.status < 300) {
+    //     setSelectedNote((prev) => {
+    //       return { ...prev, content: editorText };
+    //     });
+    //   }
+    //   return true;
+    // } catch (error) {
+    //   console.log(error);
+    //   return false;
+    // }
+  };
+
   const addNote = async (userId, name) => {
-    try {
-      const res = await axios({
-        url: "/notes",
-        method: "post",
-        params: { id: userId, title: name },
-      });
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("addNote");
+    // try {
+    //   const res = await axios({
+    //     url: "/notes",
+    //     method: "post",
+    //     params: { id: userId, title: name },
+    //   });
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const editNote = async (noteId, title) => {
-    try {
-      const res = await axios({
-        url: "/notes/" + noteId,
-        method: "put",
-        params: { id: noteId, title: title },
-      });
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("editNote");
+    // try {
+    //   const res = await axios({
+    //     url: "/notes/" + noteId,
+    //     method: "put",
+    //     params: { id: noteId, title: title },
+    //   });
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const deleteNote = async (currentNoteId) => {
-    try {
-      const res = await axios({
-        url: "/notes/" + currentNoteId,
-        method: "delete",
-        params: { id: currentNoteId },
-      });
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("deleteNote");
+    // try {
+    //   const res = await axios({
+    //     url: "/notes/" + currentNoteId,
+    //     method: "delete",
+    //     params: { id: currentNoteId },
+    //   });
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const addNotebook = async (userId, name) => {
-    try {
-      const res = await axios({
-        url: "/notebooks",
-        method: "post",
-        params: { id: userId, name },
-      });
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("addNotebook");
+    // try {
+    //   const res = await axios({
+    //     url: "/notebooks",
+    //     method: "post",
+    //     params: { id: userId, name },
+    //   });
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const editNotebook = async (notebookId, book) => {
-    try {
-      const res = await axios({
-        url: "/notebooks/" + notebookId,
-        method: "put",
-        params: { id: notebookId, book: book },
-      });
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("editNotebook");
+    // try {
+    //   const res = await axios({
+    //     url: "/notebooks/" + notebookId,
+    //     method: "put",
+    //     params: { id: notebookId, book: book },
+    //   });
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const deleteNotebook = async (currentNotebookId) => {
-    try {
-      const res = await axios({
-        url: "/notebooks/" + currentNotebookId,
-        method: "delete",
-        params: { id: currentNotebookId },
-      });
-      setState((prev) => ({
-        ...prev,
-        currentNotebookId: null,
-      }));
-      refreshData(state.userId);
-      return res.data;
-    } catch (error) {
-      return error.response;
-    }
+    console.log("deleteNotebook");
+    // try {
+    //   const res = await axios({
+    //     url: "/notebooks/" + currentNotebookId,
+    //     method: "delete",
+    //     params: { id: currentNotebookId },
+    //   });
+    //   setState((prev) => ({
+    //     ...prev,
+    //     currentNotebookId: null,
+    //   }));
+    //   // refreshData(state.userId);
+    //   return res.data;
+    // } catch (error) {
+    //   return error.response;
+    // }
   };
 
   const logOut = () => {
     Cookies.remove("id", { path: "" });
-    refreshData(state.userId);
+    // refreshData(state.userId);
   };
 
   return {
+    notebooks,
+    fetchNote,
     logOut,
-    state,
-    setState,
+    userId,
+    selectedNotebookId,
+    setSelectedNotebookId,
+    selectedNote,
+    setSelectedNote,
     saveNote,
     addNote,
     editNote,

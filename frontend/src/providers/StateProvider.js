@@ -5,8 +5,13 @@ export const StateContext = createContext();
 
 export default function StateProvider(props) {
   const {
-    state,
-    setState,
+    notebooks,
+    fetchNote,
+    userId,
+    selectedNotebookId,
+    setSelectedNotebookId,
+    selectedNote,
+    setSelectedNote,
     saveNote,
     addNote,
     editNote,
@@ -17,17 +22,14 @@ export default function StateProvider(props) {
     logOut,
   } = useApplicationData();
 
-  const { notebooks, text, isLoading, currentNotebookId, currentNote, userId } =
-    state;
-
   const stateProviderData = {
-    setState,
     notebooks,
-    text,
-    isLoading,
-    currentNotebookId,
-    currentNote,
+    fetchNote,
     userId,
+    selectedNotebookId,
+    setSelectedNotebookId,
+    selectedNote,
+    setSelectedNote,
     saveNote,
     addNote,
     editNote,
