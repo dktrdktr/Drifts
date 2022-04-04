@@ -6,12 +6,11 @@ module.exports = (db) => {
     .get("/", (request, response) => {
       db.query(
         `
-      SELECT user_id, notebooks.id, notebooks.book, json_agg(notes ORDER BY notes.id ASC) as notes FROM notebooks
-      LEFT OUTER JOIN notes ON notes.notebook_id = notebooks.id
-      WHERE user_id = $1
-      GROUP BY notebooks.id
-      ORDER BY notebooks.id
-      `,
+    SELECT notebooks.id, notebooks.book, json_agg((SELECT x FROM (SELECT notes.id, notes.title, notes.created_at, notes.updated_at) AS x)) as notes FROM notebooks
+    JOIN notes ON notes.notebook_id = notebooks.id
+    WHERE user_id = $1
+    GROUP BY notebooks.id
+    `,
         [request.query.userId]
       )
         .then((data) => {
