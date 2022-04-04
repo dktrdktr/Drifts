@@ -7,7 +7,7 @@ module.exports = (db) => {
       db.query(
         `
     SELECT * FROM notes
-    WHERE notebook_id = $1
+    WHERE notes.id = $1
     ORDER BY notes.id
     `,
         [request.query.id]
