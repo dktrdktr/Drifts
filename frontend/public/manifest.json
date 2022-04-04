@@ -1,18 +1,18 @@
 {
-  "short_name": "MarkThatDown",
-  "name": "MarkThatDown",
-  "icons": [
-    {
-      "src": "mdlogo.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "mdlogo.png",
-      "type": "image/png",
-      "sizes": "396x396"
-    }
-  ],
+  "short_name": "Drifts",
+  "name": "Drifts",
+  // "icons": [
+  //   {
+  //     "src": "mdlogo.ico",
+  //     "sizes": "64x64 32x32 24x24 16x16",
+  //     "type": "image/x-icon"
+  //   },
+  //   {
+  //     "src": "mdlogo.png",
+  //     "type": "image/png",
+  //     "sizes": "396x396"
+  //   }
+  // ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
