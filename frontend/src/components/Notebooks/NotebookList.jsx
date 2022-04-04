@@ -6,8 +6,10 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NotebookList = () => {
-  const { notebooks, userId, setState, addNotebook } = useContext(StateContext);
+  const { notebooks, userId, setSelectedNotebookId, addNotebook } =
+    useContext(StateContext);
 
+  console.log("NotebookList render");
   const renderNotebooks = () => {
     return notebooks.map((item) => {
       return (
@@ -15,14 +17,7 @@ const NotebookList = () => {
           key={item.id}
           id={item.id}
           book={item.book}
-          onClick={() =>
-            setState((prev) => ({
-              ...prev,
-              currentNotebookId: item.id,
-              currentNote: {},
-              text: "",
-            }))
-          }
+          onClick={() => setSelectedNotebookId(item.id)}
         />
       );
     });

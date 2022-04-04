@@ -4,7 +4,7 @@ import { useContext, useState, useRef, useEffect } from "react";
 import UserPrompt from "../UserPrompt";
 
 const NotebookListItem = ({ id, book, onClick }) => {
-  const { currentNotebookId, editNotebook, deleteNotebook } =
+  const { selectedNotebookId, editNotebook, deleteNotebook } =
     useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
   const [newName, setNewName] = useState(book);
@@ -39,7 +39,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
     <div>
       <div
         className={`hover:shadow-sm flex flex-row overflow-clip hover:bg-gray-200 rounded-lg cursor-pointer ${
-          id === currentNotebookId ? "bg-gray-200" : ""
+          id === selectedNotebookId ? "bg-gray-200" : ""
         } `}
         onClick={onClick}
       >

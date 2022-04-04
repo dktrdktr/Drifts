@@ -1,8 +1,7 @@
 import MarkedInput from "./MarkedInput";
 import MarkedPreview from "./MarkedPreview";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StateContext } from "../../providers/StateProvider";
-import { useContext } from "react";
 import {
   EyeIcon,
   CashIcon,
@@ -16,12 +15,17 @@ const EDIT = "EDIT";
 const VIEW = "VIEW";
 
 const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
-  const { saveNote, logOut, currentNote, text } = useContext(StateContext);
+  const { saveNote, logOut, selectedNote } = useContext(StateContext);
+  const [editorText, setEditorText] = useState("");
   const [editorMode, setEditorMode] = useState(EDIT);
   const [saveFeedback, setSaveFeedback] = useState("hidden");
 
+  useEffect(() => {
+    setEditorText(selectedNote.content);
+  }, [selectedNote]);
+
   const handleSave = async () => {
-    const response = await saveNote(currentNote.id, text);
+    const response = await saveNote(selectedNote.id, editorText);
     if (response) {
       setSaveFeedback("success");
       setTimeout(() => {
@@ -35,6 +39,7 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
     }, 1000);
   };
 
+  console.log("Editor render");
   return (
     <>
       <div className="flex w-full h-1/12 justify-between gap-x-4">
@@ -121,18 +126,24 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
       <section className="w-full h-full flex flex-column pb-2 space-x-2">
         {editorMode === SPLIT && (
           <>
-            <MarkedInput />
-            <MarkedPreview />
+            <MarkedInput
+              editorText={editorText}
+              setEditorText={setEditorText}
+            />
+            <MarkedPreview editorText={editorText} />
           </>
         )}
         {editorMode === EDIT && (
           <>
-            <MarkedInput />
+            <MarkedInput
+              editorText={editorText}
+              setEditorText={setEditorText}
+            />
           </>
         )}
         {editorMode === VIEW && (
           <>
-            <MarkedPreview />
+            <MarkedPreview editorText={editorText} />
           </>
         )}
       </section>

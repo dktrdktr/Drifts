@@ -1,15 +1,7 @@
-import { StateContext } from "../../providers/StateProvider";
-import { useContext } from "react";
-
-const MarkedInput = () => {
-  const { text, setState } = useContext(StateContext);
-
+const MarkedInput = ({ editorText, setEditorText }) => {
   const onInputChange = (e) => {
     const newValue = e.currentTarget.value;
-    setState((prev) => ({
-      ...prev,
-      text: newValue,
-    }));
+    setEditorText(newValue);
   };
 
   return (
@@ -20,7 +12,7 @@ const MarkedInput = () => {
           id=""
           className="h-full w-full bg-white focus:outline-none"
           onChange={onInputChange}
-          value={text}
+          value={editorText}
         ></textarea>
       </div>
     </div>

@@ -6,24 +6,17 @@ import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
 
 const NoteList = ({ handleNoteClick }) => {
-  const {
-    notebooks,
-    currentNotebookId,
-    currentNote,
-    text,
-    addNote,
-    saveNote,
-    setState,
-  } = useContext(StateContext);
+  const { notebooks, selectedNotebookId, fetchNote, addNote } =
+    useContext(StateContext);
 
   let renderNotes = null;
 
-  if (currentNotebookId !== null) {
-    let notebook = notebooks.find(
-      (notebook) => notebook.id === currentNotebookId
+  if (selectedNotebookId !== null) {
+    const notebook = notebooks.find(
+      (notebook) => notebook.id === selectedNotebookId
     );
 
-    if (notebook.notes[0] !== null)
+    if (notebook.notes[0] !== null) {
       renderNotes = notebook.notes.map((item) => {
         return (
           <NoteListItem
@@ -31,30 +24,27 @@ const NoteList = ({ handleNoteClick }) => {
             id={item.id}
             title={item.title}
             onClick={() => {
-              saveNote(currentNote.id, text);
-              setState((prev) => ({
-                ...prev,
-                text: item.content,
-                currentNote: item,
-              }));
-              if (handleNoteClick) {
+              const response = fetchNote(item.id);
+              if (response && handleNoteClick) {
                 handleNoteClick();
               }
             }}
           />
         );
       });
+    }
   }
 
   const onAddNew = (name) => {
-    addNote(currentNotebookId, name);
+    addNote(selectedNotebookId, name);
   };
 
+  console.log("NoteList render");
   return (
     <div className="shadow rounded-xl bg-white p-4 w-full overflow-y-auto">
       <Heading title={"Notes"} Icon={NewspaperIcon} />
       {renderNotes}
-      {currentNotebookId && (
+      {selectedNotebookId && (
         <AddButton onAddNew={onAddNew} listType={"notes"} />
       )}
     </div>
