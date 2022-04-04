@@ -1,9 +1,9 @@
-import NotebookListItem from "./NotebookListItem";
-import Heading from "../Heading";
-import AddButton from "../AddButton";
 import { CollectionIcon } from "@heroicons/react/outline";
-import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
+import { StateContext } from "../../providers/StateProvider";
+import AddButton from "../AddButton";
+import Heading from "../Heading";
+import NotebookListItem from "./NotebookListItem";
 
 const NotebookList = () => {
   const { notebooks, userId, setSelectedNotebookId, addNotebook } =

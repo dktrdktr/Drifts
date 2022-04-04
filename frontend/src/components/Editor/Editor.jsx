@@ -1,14 +1,14 @@
-import MarkedInput from "./MarkedInput";
-import MarkedPreview from "./MarkedPreview";
-import { useState, useContext, useEffect } from "react";
-import { StateContext } from "../../providers/StateProvider";
 import {
-  EyeIcon,
   CashIcon,
   ChevronLeftIcon,
-  SaveIcon,
+  EyeIcon,
   LogoutIcon,
+  SaveIcon,
 } from "@heroicons/react/outline";
+import { useContext, useEffect, useState } from "react";
+import { StateContext } from "../../providers/StateProvider";
+import MarkedInput from "./MarkedInput";
+import MarkedPreview from "./MarkedPreview";
 
 const SPLIT = "SPLIT";
 const EDIT = "EDIT";

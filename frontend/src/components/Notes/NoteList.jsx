@@ -1,9 +1,9 @@
-import NoteListItem from "./NoteListItem";
-import Heading from "../Heading";
-import AddButton from "../AddButton";
 import { NewspaperIcon } from "@heroicons/react/outline";
-import { StateContext } from "../../providers/StateProvider";
 import { useContext } from "react";
+import { StateContext } from "../../providers/StateProvider";
+import AddButton from "../AddButton";
+import Heading from "../Heading";
+import NoteListItem from "./NoteListItem";
 
 const NoteList = ({ handleNoteClick }) => {
   const { notebooks, selectedNotebookId, fetchNote, addNote } =

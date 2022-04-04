@@ -1,9 +1,9 @@
 import {
-  PlusCircleIcon,
-  NewspaperIcon,
   DocumentTextIcon,
+  NewspaperIcon,
+  PlusCircleIcon,
 } from "@heroicons/react/outline";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AddButton = ({ onAddNew, listType }) => {
   const [nameMode, setNameMode] = useState(false);

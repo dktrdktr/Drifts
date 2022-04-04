@@ -1,6 +1,6 @@
 import { NewspaperIcon, PencilIcon, TrashIcon } from "@heroicons/react/outline";
+import { useContext, useEffect, useRef, useState } from "react";
 import { StateContext } from "../../providers/StateProvider";
-import { useContext, useState, useRef, useEffect } from "react";
 import UserPrompt from "../UserPrompt";
 
 const NotebookListItem = ({ id, book, onClick }) => {
