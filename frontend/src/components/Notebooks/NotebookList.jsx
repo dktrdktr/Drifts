@@ -11,7 +11,7 @@ const NotebookList = () => {
 
   console.log("NotebookList render");
   const renderNotebooks = () => {
-    return notebooks.map((item) => {
+    return Object.values(notebooks).map((item) => {
       return (
         <NotebookListItem
           key={item.id}

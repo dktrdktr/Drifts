@@ -12,7 +12,7 @@ const NoteList = ({ handleNoteClick }) => {
   let renderNotes = null;
 
   if (selectedNotebookId !== null) {
-    const notebook = notebooks.find(
+    const notebook = Object.values(notebooks).find(
       (notebook) => notebook.id === selectedNotebookId
     );
 

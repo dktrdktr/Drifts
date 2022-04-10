@@ -22,9 +22,14 @@ export default function useApplicationData() {
             method: "get",
             params: { userId: userId },
           });
-          if (response) {
-            const notebooksData = response.data.notebooks;
-            setNotebooks(notebooksData);
+          if (response.status >= 200 && response.status < 300) {
+            const notebooksArr = response.data.notebooks;
+            // Refactor notebooks array into an object, for easier state updating
+            const notebooksObj = notebooksArr.reduce((accum, item) => {
+              accum[item.id] = item;
+              return accum;
+            }, {});
+            setNotebooks(notebooksObj);
           }
         }
       } catch (err) {
@@ -74,17 +79,23 @@ export default function useApplicationData() {
 
   const addNote = async (userId, name) => {
     console.log("addNote");
-    // try {
-    //   const res = await axios({
-    //     url: "/notes",
-    //     method: "post",
-    //     params: { id: userId, title: name },
-    //   });
-    //   // refreshData(state.userId);
-    //   return res.data;
-    // } catch (error) {
-    //   return error.response;
-    // }
+    try {
+      const res = await axios({
+        url: "/notes",
+        method: "post",
+        params: { id: userId, title: name },
+      });
+      if (res.status >= 200 && res.status < 300) {
+        const newNote = res.data;
+        const notebookCopy = { ...notebooks[selectedNotebookId] };
+        notebookCopy.notes.push(newNote);
+        setNotebooks({ ...notebooks, [selectedNotebookId]: notebookCopy });
+      }
+      return true;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   };
 
   const editNote = async (noteId, title) => {

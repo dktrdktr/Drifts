@@ -46,10 +46,13 @@ module.exports = (db) => {
     // Add new note
     .post("/", (request, response) => {
       db.query(
-        `INSERT INTO notes (notebook_id, title) VALUES ($1::integer, $2)`,
+        `INSERT INTO notes (notebook_id, title) VALUES ($1::integer, $2) RETURNING id, title, created_at, updated_at`,
         [request.query.id, request.query.title]
-      ).then(() => {
-        response.status(204).json({});
+      ).then((res) => {
+        console.log("res.rows[0]", res.rows[0]);
+        const newNote = res.rows[0];
+        // const notes = data.rows;
+        response.json(newNote);
       });
     })
 
