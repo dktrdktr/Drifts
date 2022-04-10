@@ -168,19 +168,25 @@ export default function useApplicationData() {
     }
   };
 
-  const editNotebook = async (notebookId, title) => {
+  const editNotebook = async (notebookId, newTitle) => {
     console.log("editNotebook");
-    // try {
-    //   const res = await axios({
-    //     url: "/notebooks/" + notebookId,
-    //     method: "put",
-    //     params: { id: notebookId, title: title },
-    //   });
-    //   // refreshData(state.userId);
-    //   return res.data;
-    // } catch (error) {
-    //   return error.response;
-    // }
+    try {
+      const res = await axios({
+        url: "/notebooks/" + notebookId,
+        method: "put",
+        params: { id: notebookId, title: newTitle },
+      });
+      if (res.status >= 200 && res.status < 300) {
+        const notebookCopy = { ...notebooks[notebookId] };
+        notebookCopy.title = newTitle;
+        setNotebooks({ ...notebooks, [notebookId]: notebookCopy });
+        return { ok: true };
+      }
+      return { ok: false };
+    } catch (err) {
+      console.log(err);
+      return { ok: false };
+    }
   };
 
   const deleteNotebook = async (currentNotebookId) => {

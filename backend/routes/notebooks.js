@@ -6,7 +6,7 @@ module.exports = (db) => {
     .get("/", (request, response) => {
       db.query(
         `
-    SELECT notebooks.id, notebooks.book, json_agg((SELECT x FROM (SELECT notes.id, notes.title, notes.created_at, notes.updated_at) AS x)) as notes FROM notebooks
+    SELECT notebooks.id, notebooks.title, json_agg((SELECT x FROM (SELECT notes.id, notes.title, notes.created_at, notes.updated_at) AS x)) as notes FROM notebooks
     JOIN notes ON notes.notebook_id = notebooks.id
     WHERE user_id = $1
     GROUP BY notebooks.id
@@ -31,7 +31,7 @@ module.exports = (db) => {
       SET title = $2
       WHERE id = ($1::integer)
       `,
-        [request.query.id, request.query.book]
+        [request.query.id, request.query.title]
       ).then(() => {
         response.status(204).json({});
       });
