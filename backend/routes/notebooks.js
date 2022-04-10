@@ -28,7 +28,7 @@ module.exports = (db) => {
       db.query(
         `
       UPDATE notebooks
-      SET book = $2
+      SET title = $2
       WHERE id = ($1::integer)
       `,
         [request.query.id, request.query.book]
@@ -40,10 +40,11 @@ module.exports = (db) => {
     // Add new notebook
     .post("/", (request, response) => {
       db.query(
-        `INSERT INTO notebooks (user_id, book) VALUES ($1::integer, $2)`,
+        `INSERT INTO notebooks (user_id, title) VALUES ($1::integer, $2) RETURNING id, title`,
         [request.query.id, request.query.name]
-      ).then(() => {
-        response.status(204).json({});
+      ).then((res) => {
+        const newNotebook = res.rows[0];
+        response.json(newNotebook);
       });
     })
 

@@ -16,7 +16,7 @@ const NotebookList = () => {
         <NotebookListItem
           key={item.id}
           id={item.id}
-          book={item.book}
+          title={item.title}
           onClick={() => setSelectedNotebookId(item.id)}
         />
       );

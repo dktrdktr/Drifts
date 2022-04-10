@@ -51,7 +51,6 @@ module.exports = (db) => {
       ).then((res) => {
         console.log("res.rows[0]", res.rows[0]);
         const newNote = res.rows[0];
-        // const notes = data.rows;
         response.json(newNote);
       });
     })

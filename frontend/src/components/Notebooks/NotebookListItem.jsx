@@ -3,11 +3,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { StateContext } from "../../providers/StateProvider";
 import UserPrompt from "../UserPrompt";
 
-const NotebookListItem = ({ id, book, onClick }) => {
+const NotebookListItem = ({ id, title, onClick }) => {
   const { selectedNotebookId, editNotebook, deleteNotebook } =
     useContext(StateContext);
   const [editNameMode, setEditNameMode] = useState(false);
-  const [newName, setNewName] = useState(book);
+  const [newName, setNewName] = useState(title);
   const [showDeletePrompt, setShowDeletePrompt] = useState(false);
   const nameInput = useRef(null);
 
@@ -45,7 +45,7 @@ const NotebookListItem = ({ id, book, onClick }) => {
       >
         <div className="flex flex-row w-4/6 items-center text-sm pl-3 h-12 rounded-lg">
           <NewspaperIcon className={"h-4 w-4 block mr-2 shrink-0"} />
-          {!editNameMode && <span className="truncate">{book}</span>}
+          {!editNameMode && <span className="truncate">{title}</span>}
           {editNameMode && (
             <form onSubmit={handleNameSubmit}>
               <input
