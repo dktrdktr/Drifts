@@ -54,22 +54,22 @@ export default function useApplicationData() {
 
   const saveNote = async (noteId, editorText) => {
     console.log("saveNote");
-    // try {
-    //   const response = await axios({
-    //     url: "/notes/" + noteId,
-    //     method: "put",
-    //     params: { id: noteId, content: editorText },
-    //   });
-    //   if (response.status >= 200 && response.status < 300) {
-    //     setSelectedNote((prev) => {
-    //       return { ...prev, content: editorText };
-    //     });
-    //   }
-    //   return true;
-    // } catch (error) {
-    //   console.log(error);
-    //   return false;
-    // }
+    try {
+      const response = await axios({
+        url: "/notes/" + noteId,
+        method: "put",
+        params: { id: noteId, content: editorText },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        setSelectedNote((prev) => {
+          return { ...prev, content: editorText };
+        });
+      }
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 
   const addNote = async (userId, name) => {
