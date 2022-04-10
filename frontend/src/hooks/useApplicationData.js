@@ -58,7 +58,6 @@ export default function useApplicationData() {
   };
 
   const saveNote = async (noteId, editorText) => {
-    console.log("saveNote");
     try {
       const response = await axios({
         url: "/notes/" + noteId,
@@ -78,7 +77,6 @@ export default function useApplicationData() {
   };
 
   const addNote = async (userId, name) => {
-    console.log("addNote");
     try {
       const res = await axios({
         url: "/notes",
@@ -113,19 +111,26 @@ export default function useApplicationData() {
     // }
   };
 
-  const deleteNote = async (currentNoteId) => {
-    console.log("deleteNote");
-    // try {
-    //   const res = await axios({
-    //     url: "/notes/" + currentNoteId,
-    //     method: "delete",
-    //     params: { id: currentNoteId },
-    //   });
-    //   // refreshData(state.userId);
-    //   return res.data;
-    // } catch (error) {
-    //   return error.response;
-    // }
+  const deleteNote = async (noteId) => {
+    try {
+      const res = await axios({
+        url: "/notes/" + noteId,
+        method: "delete",
+        params: { id: noteId },
+      });
+      if (res.status >= 200 && res.status < 300) {
+        const notebookCopy = { ...notebooks[selectedNotebookId] };
+        const updatedNotes = notebookCopy.notes.filter(
+          (note) => note.id !== noteId
+        );
+        const updatedNotebook = { ...notebookCopy, notes: updatedNotes };
+        setNotebooks({ ...notebooks, [selectedNotebookId]: updatedNotebook });
+        return true;
+      }
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   };
 
   const addNotebook = async (userId, name) => {
