@@ -25,8 +25,8 @@ const Editor = ({ viewMode, handleEditorBackClick, setUserAuth }) => {
   }, [selectedNote]);
 
   const handleSave = async () => {
-    const response = await saveNote(selectedNote.id, editorText);
-    if (response) {
+    const res = await saveNote(selectedNote.id, editorText);
+    if (res.ok) {
       setSaveFeedback("success");
       setTimeout(() => {
         setSaveFeedback("hidden");

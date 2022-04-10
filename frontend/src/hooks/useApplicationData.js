@@ -49,11 +49,12 @@ export default function useApplicationData() {
       });
       if (response && response.data.notes[0].length !== 0) {
         setSelectedNote(response.data.notes[0]);
+        return { ok: true };
       }
-      return true;
+      return { ok: false };
     } catch (err) {
       console.log(err);
-      return false;
+      return { ok: false };
     }
   };
 
@@ -68,11 +69,12 @@ export default function useApplicationData() {
         setSelectedNote((prev) => {
           return { ...prev, content: editorText };
         });
+        return { ok: true };
       }
-      return true;
+      return { ok: false };
     } catch (error) {
       console.log(error);
-      return false;
+      return { ok: false };
     }
   };
 
@@ -88,11 +90,12 @@ export default function useApplicationData() {
         const notebookCopy = { ...notebooks[selectedNotebookId] };
         notebookCopy.notes.push(newNote);
         setNotebooks({ ...notebooks, [selectedNotebookId]: notebookCopy });
+        return { ok: true };
       }
-      return true;
+      return { ok: false };
     } catch (err) {
       console.log(err);
-      return false;
+      return { ok: false };
     }
   };
 
@@ -110,12 +113,12 @@ export default function useApplicationData() {
         );
         notebookCopy.notes[noteIndex].title = title;
         setNotebooks({ ...notebooks, [selectedNotebookId]: notebookCopy });
-        return true;
+        return { ok: true };
       }
-      return res.data;
+      return { ok: false };
     } catch (err) {
       console.log(err);
-      return false;
+      return { ok: false };
     }
   };
 
@@ -133,11 +136,12 @@ export default function useApplicationData() {
         );
         const updatedNotebook = { ...notebookCopy, notes: updatedNotes };
         setNotebooks({ ...notebooks, [selectedNotebookId]: updatedNotebook });
-        return true;
+        return { ok: true };
       }
+      return { ok: false };
     } catch (err) {
       console.log(err);
-      return false;
+      return { ok: false };
     }
   };
 

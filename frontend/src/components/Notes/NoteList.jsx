@@ -25,7 +25,7 @@ const NoteList = ({ handleNoteClick }) => {
             title={item.title}
             onClick={() => {
               const response = fetchNote(item.id);
-              if (response && handleNoteClick) {
+              if (response.ok && handleNoteClick) {
                 handleNoteClick();
               }
             }}
