@@ -15,8 +15,7 @@ const NoteList = ({ handleNoteClick }) => {
     const notebook = Object.values(notebooks).find(
       (notebook) => notebook.id === selectedNotebookId
     );
-
-    if (notebook.notes[0] !== null) {
+    if (notebook.notes && notebook.notes.length !== 0) {
       renderNotes = notebook.notes.map((item) => {
         return (
           <NoteListItem

@@ -146,7 +146,6 @@ export default function useApplicationData() {
   };
 
   const addNotebook = async (userId, name) => {
-    console.log("addNotebook");
     try {
       const res = await axios({
         url: "/notebooks",
@@ -169,7 +168,6 @@ export default function useApplicationData() {
   };
 
   const editNotebook = async (notebookId, newTitle) => {
-    console.log("editNotebook");
     try {
       const res = await axios({
         url: "/notebooks/" + notebookId,
@@ -189,28 +187,29 @@ export default function useApplicationData() {
     }
   };
 
-  const deleteNotebook = async (currentNotebookId) => {
-    console.log("deleteNotebook");
-    // try {
-    //   const res = await axios({
-    //     url: "/notebooks/" + currentNotebookId,
-    //     method: "delete",
-    //     params: { id: currentNotebookId },
-    //   });
-    //   setState((prev) => ({
-    //     ...prev,
-    //     currentNotebookId: null,
-    //   }));
-    //   // refreshData(state.userId);
-    //   return res.data;
-    // } catch (error) {
-    //   return error.response;
-    // }
+  const deleteNotebook = async (notebookId) => {
+    try {
+      const res = await axios({
+        url: "/notebooks/" + notebookId,
+        method: "delete",
+        params: { id: notebookId },
+      });
+      if (res.status >= 200 && res.status < 300) {
+        const notebooksCopy = { ...notebooks };
+        delete notebooksCopy[notebookId];
+        setSelectedNotebookId(null);
+        setNotebooks(notebooksCopy);
+        return { ok: true };
+      }
+      return { ok: false };
+    } catch (err) {
+      console.log(err);
+      return { ok: false };
+    }
   };
 
   const logOut = () => {
     Cookies.remove("id", { path: "" });
-    // refreshData(state.userId);
   };
 
   return {
