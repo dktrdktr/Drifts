@@ -4,10 +4,14 @@ const router = express.Router();
 module.exports = (db) => {
   router
     .get("/", (request, response) => {
+      // This query is too complex, a simpler solution would be desirable to aggregate the notes data
+      // LEFT JOIN is necessary to return notebooks which have no notes
+      // COALESCE FILTER pattern is necessary to prevent null values returned inside the notes array
+      // https://stackoverflow.com/questions/24155190/postgresql-left-join-json-agg-ignore-remove-null
       db.query(
         `
-    SELECT notebooks.id, notebooks.title, json_agg((SELECT x FROM (SELECT notes.id, notes.title, notes.created_at, notes.updated_at) AS x)) as notes FROM notebooks
-    JOIN notes ON notes.notebook_id = notebooks.id
+    SELECT notebooks.id, notebooks.title, COALESCE(json_agg((SELECT x FROM (SELECT notes.id, notes.title, notes.created_at, notes.updated_at) AS x)) FILTER (WHERE notes.id IS NOT NULL), '[]') as notes FROM notebooks
+    LEFT JOIN notes ON notes.notebook_id = notebooks.id
     WHERE user_id = $1
     GROUP BY notebooks.id
     `,
