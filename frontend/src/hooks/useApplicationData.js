@@ -24,7 +24,7 @@ export default function useApplicationData() {
           });
           if (response.status >= 200 && response.status < 300) {
             const notebooksArr = response.data.notebooks;
-            // Refactor notebooks array into an object, for easier state updating
+            // Convert notebooks array into an object, for easier state updating when performing CRUD operations
             const notebooksObj = notebooksArr.reduce((accum, item) => {
               accum[item.id] = item;
               return accum;
@@ -97,18 +97,26 @@ export default function useApplicationData() {
   };
 
   const editNote = async (noteId, title) => {
-    console.log("editNote");
-    // try {
-    //   const res = await axios({
-    //     url: "/notes/" + noteId,
-    //     method: "put",
-    //     params: { id: noteId, title: title },
-    //   });
-    //   // refreshData(state.userId);
-    //   return res.data;
-    // } catch (error) {
-    //   return error.response;
-    // }
+    try {
+      const res = await axios({
+        url: "/notes/" + noteId,
+        method: "put",
+        params: { id: noteId, title: title },
+      });
+      if (res.status >= 200 && res.status < 300) {
+        const notebookCopy = { ...notebooks[selectedNotebookId] };
+        const noteIndex = notebookCopy.notes.findIndex(
+          (note) => note.id === noteId
+        );
+        notebookCopy.notes[noteIndex].title = title;
+        setNotebooks({ ...notebooks, [selectedNotebookId]: notebookCopy });
+        return true;
+      }
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
   };
 
   const deleteNote = async (noteId) => {
